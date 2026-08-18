@@ -1,0 +1,19 @@
+{{- /* 全站公告栏（可关闭，会话级记忆） */ -}}
+{{- with .Site.Params.announcement -}}
+{{- if .enabled -}}
+<div id="announcement" class="announcement">
+  <div class="container announcement-inner">
+    <span>
+      {{- if .url }}<a href="{{ .url }}">{{ end -}}
+      {{ .text | markdownify }}
+      {{- if .url }}</a>{{ end -}}
+    </span>
+    {{- if .dismissible -}}
+    <button id="announcement-close" class="announcement-close" type="button" aria-label="{{ i18n "close" }}">
+      <svg><use href="#icon-x"></use></svg>
+    </button>
+    {{- end -}}
+  </div>
+</div>
+{{- end -}}
+{{- end -}}

@@ -1,0 +1,16 @@
+{{- /* 搜索索引（JSON）：首页输出格式 searchindex 生成 index.json */ -}}
+{{- $items := slice -}}
+{{- range $p := site.RegularPages -}}
+  {{- if not $p.Params.password -}}
+    {{- $items = $items | append (dict
+      "title" $p.Title
+      "summary" ($p.Summary | plainify)
+      "content" ($p.Plain | plainify)
+      "permalink" $p.RelPermalink
+      "section" $p.Section
+      "date" ($p.Date.Format "2006-01-02")
+      "tags" $p.Params.tags
+    | jsonify) -}}
+  {{- end -}}
+{{- end -}}
+[{{ delimit $items "," }}]

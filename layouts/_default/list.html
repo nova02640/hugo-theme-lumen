@@ -1,0 +1,26 @@
+{{- /* 通用列表页：栏目 / 分类词条 / 标签词条 */ -}}
+{{ define "main" }}
+{{- partial "breadcrumbs.html" . -}}
+
+<section class="section-header">
+  <h1>{{ .Title }}</h1>
+  {{- if gt .Paginator.TotalNumberOfElements 0 -}}
+  <span class="list-count">{{ i18n "totalPosts" .Paginator.TotalNumberOfElements }}</span>
+  {{- end -}}
+</section>
+
+{{- with .Content -}}
+<div class="list-description">{{ . }}</div>
+{{- end -}}
+
+{{- if .Paginator.Pages -}}
+<div class="post-list">
+  {{- range .Paginator.Pages -}}
+  {{- partial "post-card.html" (dict "page" . "mode" "list") -}}
+  {{- end -}}
+</div>
+{{- partial "pagination.html" .Paginator -}}
+{{- else -}}
+<div class="list-description">{{ i18n "noPosts" }}</div>
+{{- end -}}
+{{ end }}

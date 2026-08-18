@@ -1,0 +1,184 @@
+# Lumen English translation
+[skipToContent]
+other = "Skip to content"
+
+[home]
+other = "Home"
+
+[search]
+other = "Search"
+
+[searchPlaceholder]
+other = "Type keywords to search posts…"
+
+[searchHint]
+other = "Fuzzy match on title and content · press <kbd>/</kbd> to focus · <kbd>Esc</kbd> to clear"
+
+[searchNoResults]
+other = "No results found. Try different keywords."
+
+[searchLoading]
+other = "Loading search index…"
+
+[searchLoadError]
+other = "Failed to load search index. Please refresh."
+
+[categories]
+other = "Categories"
+
+[tags]
+other = "Tags"
+
+[archives]
+other = "Archives"
+
+[about]
+other = "About"
+
+[friends]
+other = "Friends"
+
+[menu]
+other = "Menu"
+
+[toc]
+other = "On this page"
+
+[tocToggle]
+other = "Collapse / expand table of contents"
+
+[collapse]
+other = "−"
+
+[expand]
+other = "＋"
+
+[close]
+other = "Close"
+
+[switchTheme]
+other = "Switch theme (auto / light / dark)"
+
+[prevPage]
+other = "Previous page"
+
+[nextPage]
+other = "Next page"
+
+[prevPost]
+other = "Previous post"
+
+[nextPost]
+other = "Next post"
+
+[postNav]
+other = "Post navigation"
+
+[relatedPosts]
+other = "Related Posts"
+
+[wordCount]
+other = "{{ . }} words"
+
+[wordCountLabel]
+other = "Word count"
+
+[readingTime]
+other = "~{{ . }} min read"
+
+[licenseTitle]
+other = "License:"
+
+[comments]
+other = "Comments"
+
+[backToTop]
+other = "Back to top"
+
+[copy]
+other = "Copy"
+
+[copied]
+other = "Copied ✓"
+
+[lineNumbers]
+other = "#"
+
+[lightbox]
+other = "Image viewer"
+
+[lightboxPrev]
+other = "Previous image"
+
+[lightboxNext]
+other = "Next image"
+
+[encryptTitle]
+other = "This post is protected. Enter the password to unlock."
+
+[passwordPlaceholder]
+other = "Password"
+
+[unlock]
+other = "Unlock"
+
+[wrongPassword]
+other = "Incorrect password. Please try again."
+
+[poweredBy]
+other = "Powered by <a href=\"https://gohugo.io\" target=\"_blank\" rel=\"noopener\">Hugo</a> · Theme <a href=\"https://github.com/nova02640/hugo-theme-lumen\" target=\"_blank\" rel=\"noopener\">Lumen</a>"
+
+[pageNotFound]
+other = "Sorry, the page you are looking for does not exist or has been moved."
+
+[backHome]
+other = "Back to Home"
+
+[permalink]
+other = "Permalink to this section"
+
+[totalTerms]
+other = "{{ . }} in total"
+
+[totalPosts]
+other = "{{ . }} posts"
+
+[postCount]
+other = "{{ . }} posts"
+
+[noPosts]
+other = "No posts here yet."
+
+[friendsEmpty]
+other = "No friends data: add entries to data/friends.toml to display friend cards."
+
+[published]
+other = "Published"
+
+[updated]
+other = "Updated"
+
+[month_01]
+other = "January"
+[month_02]
+other = "February"
+[month_03]
+other = "March"
+[month_04]
+other = "April"
+[month_05]
+other = "May"
+[month_06]
+other = "June"
+[month_07]
+other = "July"
+[month_08]
+other = "August"
+[month_09]
+other = "September"
+[month_10]
+other = "October"
+[month_11]
+other = "November"
+[month_12]
+other = "December"

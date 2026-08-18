@@ -1,0 +1,25 @@
+{{- /* 头部：SEO + 无闪烁主题着色 + 内联关键 CSS + 资源声明 */ -}}
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="Hugo {{ hugo.Version }}">
+
+{{- partial "seo.html" . -}}
+
+{{- /* 首帧无闪烁主题着色：在 CSS 应用前设置 data-theme */ -}}
+<script>
+(function(){try{var m=localStorage.getItem('lumen-theme');var d=m==='dark'||(m!=='light'&&window.matchMedia('(prefers-color-scheme: dark)').matches);var r=document.documentElement;r.setAttribute('data-theme',d?'dark':'light');r.setAttribute('data-theme-mode',(m==='light'||m==='dark')?m:'auto');}catch(e){}})();
+</script>
+
+{{- /* 内联压缩后的全量 CSS：零阻塞请求，无样式闪烁 */ -}}
+{{- $css := slice (resources.Get "css/_variables.css") (resources.Get "css/main.css") (resources.Get "css/_code.css") | resources.Concat "css/lumen.css" | minify -}}
+<style>{{ $css.Content | safeCSS }}</style>
+
+{{- /* 图标与清单 */ -}}
+<link rel="icon" href="{{ "favicon.svg" | relURL }}" type="image/svg+xml">
+<link rel="icon" href="{{ "favicon.ico" | relURL }}" sizes="any">
+{{- if .Site.Params.enablePWA -}}
+<link rel="manifest" href="{{ "manifest.webmanifest" | relURL }}">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="{{ .Site.Title }}">
+<link rel="apple-touch-icon" href="{{ "icons/icon-192.png" | relURL }}">
+{{- end -}}

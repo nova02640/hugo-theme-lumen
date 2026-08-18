@@ -1,0 +1,45 @@
+{{- /* 首页：经典列表 / 杂志卡片双布局 */ -}}
+{{ define "main" }}
+{{- $posts := where site.RegularPages "Section" "in" site.MainSections -}}
+{{- $paginator := .Paginate $posts -}}
+
+{{- if and .IsHome (eq $paginator.PageNumber 1) -}}
+<section class="home-hero">
+  <h1><span class="hero-gradient">{{ .Site.Title }}</span></h1>
+  {{- with .Site.Params.description -}}
+  <p class="subtitle">{{ . | markdownify }}</p>
+  {{- end -}}
+</section>
+{{- end -}}
+
+{{- $layout := .Site.Params.homeLayout | default "list" -}}
+
+{{- if eq $layout "card" -}}
+  {{- if and (eq $paginator.PageNumber 1) $paginator.Pages -}}
+  <div class="post-featured">
+    {{- range first 1 $paginator.Pages -}}
+    {{- partial "post-card.html" (dict "page" . "mode" "featured") -}}
+    {{- end -}}
+  </div>
+  <div class="post-grid">
+    {{- range after 1 $paginator.Pages -}}
+    {{- partial "post-card.html" (dict "page" . "mode" "grid") -}}
+    {{- end -}}
+  </div>
+  {{- else -}}
+  <div class="post-grid">
+    {{- range $paginator.Pages -}}
+    {{- partial "post-card.html" (dict "page" . "mode" "grid") -}}
+    {{- end -}}
+  </div>
+  {{- end -}}
+{{- else -}}
+<div class="post-list">
+  {{- range $paginator.Pages -}}
+  {{- partial "post-card.html" (dict "page" . "mode" "list") -}}
+  {{- end -}}
+</div>
+{{- end -}}
+
+{{- partial "pagination.html" $paginator -}}
+{{ end }}

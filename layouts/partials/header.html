@@ -1,0 +1,34 @@
+{{- /* 顶栏：品牌 + 导航 + 动作区 */ -}}
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="site-brand" href="{{ .Site.Home.RelPermalink }}">
+      {{- with .Site.Params.logo -}}
+      <img src="{{ . | relURL }}" alt="{{ $.Site.Title }}" width="28" height="28">
+      {{- end -}}
+      <span>{{ .Site.Title }}</span>
+    </a>
+
+    <nav class="site-nav" id="site-nav" aria-label="{{ i18n "menu" }}">
+      {{- range .Site.Menus.main -}}
+      {{- $active := or ($.IsMenuCurrent "main" .) ($.HasMenuCurrent "main" .) -}}
+      <a href="{{ .URL }}" class="{{ if $active }}active{{ end }}">{{ .Name }}</a>
+      {{- end -}}
+    </nav>
+
+    <div class="header-actions">
+      {{- if .Site.Params.enableSearch -}}
+      <a class="icon-btn" href="{{ "search" | relLangURL }}" aria-label="{{ i18n "search" }}" title="{{ i18n "search" }}">
+        <svg><use href="#icon-search"></use></svg>
+      </a>
+      {{- end -}}
+      <button id="theme-toggle" class="icon-btn theme-toggle" type="button" aria-label="{{ i18n "switchTheme" }}" title="{{ i18n "switchTheme" }}">
+        <svg data-icon="auto"><use href="#icon-monitor"></use></svg>
+        <svg data-icon="light"><use href="#icon-sun"></use></svg>
+        <svg data-icon="dark"><use href="#icon-moon"></use></svg>
+      </button>
+      <button id="nav-toggle" class="icon-btn nav-toggle" type="button" aria-label="{{ i18n "menu" }}" aria-expanded="false" aria-controls="site-nav">
+        <svg><use href="#icon-menu"></use></svg>
+      </button>
+    </div>
+  </div>
+</header>

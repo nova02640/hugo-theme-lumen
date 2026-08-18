@@ -1,0 +1,11 @@
+{{- /* 智能目录（桌面侧栏）：滚动高亮由 main.js 驱动 */ -}}
+{{- $toc := .TableOfContents -}}
+{{- if ne (strings.TrimSpace $toc) "" -}}
+<div id="toc" class="toc">
+  <div class="toc-header">
+    <span>{{ i18n "toc" }}</span>
+    <button id="toc-collapse" type="button" aria-label="{{ i18n "tocToggle" }}">−</button>
+  </div>
+  {{ $toc | safeHTML }}
+</div>
+{{- end -}}

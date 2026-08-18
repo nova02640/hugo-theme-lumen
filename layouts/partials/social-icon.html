@@ -1,0 +1,10 @@
+{{- /* 社交图标：按名称映射 SVG 符号 */ -}}
+{{- $name := lower . -}}
+{{- $icon := "icon-link" -}}
+{{- if eq $name "github" }}{{ $icon = "icon-github" }}
+{{- else if or (eq $name "twitter") (eq $name "x") }}{{ $icon = "icon-twitter" }}
+{{- else if or (eq $name "email") (eq $name "mail") }}{{ $icon = "icon-email" }}
+{{- else if eq $name "rss" }}{{ $icon = "icon-rss" }}
+{{- else if eq $name "link" }}{{ $icon = "icon-link" }}
+{{- end -}}
+<svg><use href="#{{ $icon }}"></use></svg>

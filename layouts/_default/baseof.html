@@ -1,0 +1,46 @@
+{{- /* 全站基础骨架 */ -}}
+<!DOCTYPE html>
+<html lang="{{ .Site.Language.Lang }}" data-theme-mode="auto">
+<head>
+  {{- partial "head.html" . -}}
+</head>
+<body data-pwa="{{ if .Site.Params.enablePWA }}true{{ else }}false{{ end }}">
+  <a class="skip-link" href="#main">{{ i18n "skipToContent" }}</a>
+
+  {{- partial "announcement.html" . -}}
+  {{- partial "header.html" . -}}
+
+  <div id="reading-progress" class="progress-bar" role="presentation"></div>
+
+  <main id="main" class="main container">
+    {{- block "main" . }}{{ end -}}
+  </main>
+
+  {{- partial "footer.html" . -}}
+  {{- partial "back-to-top.html" . -}}
+  {{- partial "icons.html" . -}}
+
+  {{- /* 界面文案注入（JS 组件使用） */ -}}
+  {{- $i18nJS := dict
+    "copy" (i18n "copy")
+    "copied" (i18n "copied")
+    "lineNumbers" (i18n "lineNumbers")
+    "expand" (i18n "expand")
+    "collapse" (i18n "collapse")
+    "close" (i18n "close")
+    "lightbox" (i18n "lightbox")
+    "prev" (i18n "lightboxPrev")
+    "next" (i18n "lightboxNext")
+    "encrypt" (dict "title" (i18n "encryptTitle") "placeholder" (i18n "passwordPlaceholder") "submit" (i18n "unlock") "wrong" (i18n "wrongPassword"))
+    "search" (dict "noResults" (i18n "searchNoResults") "loading" (i18n "searchLoading") "loadError" (i18n "searchLoadError"))
+  -}}
+  <script>window.LUMEN_I18N = {{ $i18nJS | jsonify | safeJS }};</script>
+
+  {{- /* 主题切换 / 全局交互 / 单文加密（defer 异步加载） */ -}}
+  {{- $js := slice (resources.Get "js/theme.js") (resources.Get "js/main.js") (resources.Get "js/encrypt.js") | resources.Concat "js/lumen.js" | minify | fingerprint -}}
+  <script src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}" defer></script>
+
+  {{- /* 页面级附加脚本（如搜索页的 Fuse.js） */ -}}
+  {{- block "extra-scripts" . }}{{ end -}}
+</body>
+</html>

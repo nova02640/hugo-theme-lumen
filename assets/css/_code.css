@@ -1,0 +1,101 @@
+/* ============================================================
+   Lumen — 代码块样式（Hugo Chroma，class 模式，双主题适配）
+   功能：一键复制、行号开关（CSS 显示/隐藏 .lnt 列）
+   ============================================================ */
+
+.code-block {
+  position: relative;
+  margin: var(--sp-6) 0;
+  background: var(--code-bg);
+  border: 1px solid var(--code-border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+/* 代码块工具条（复制 / 行号开关） */
+.code-toolbar {
+  position: absolute;
+  top: var(--sp-2);
+  right: var(--sp-2);
+  z-index: 2;
+  display: flex;
+  gap: 4px;
+  opacity: 0;
+  transition: opacity var(--transition);
+}
+.code-block:hover .code-toolbar, .code-toolbar:focus-within { opacity: 1; }
+.code-toolbar button {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  height: 28px;
+  padding: 0 10px;
+  font-family: var(--font-sans);
+  font-size: 12px;
+  color: var(--text-2);
+  background: var(--code-header-bg);
+  border: 1px solid var(--code-border);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: color var(--transition), border-color var(--transition);
+}
+.code-toolbar button:hover { color: var(--brand); border-color: var(--brand); }
+.code-toolbar button svg { width: 13px; height: 13px; }
+.code-toolbar button.copied { color: var(--note-tip-fg); }
+
+/* Chroma 容器 */
+.code-block .highlight { margin: 0; }
+.code-block pre {
+  margin: 0;
+  padding: var(--sp-4) var(--sp-5);
+  overflow-x: auto;
+  line-height: 1.65;
+  font-size: 0.875rem;
+  tab-size: 4;
+}
+.code-block pre::-webkit-scrollbar { height: 8px; }
+.code-block code { font-size: inherit; background: none; padding: 0; }
+
+/* 行号：默认隐藏，通过 .show-line-numbers 开启（行号开关） */
+.highlight .lntd:first-child,
+.highlight .lntd:first-child pre { display: none; }
+.code-block.show-line-numbers .highlight .lntd:first-child { display: table-cell; }
+.code-block.show-line-numbers .highlight .lntd:first-child pre { display: block; }
+.highlight .lnt {
+  color: var(--text-3);
+  user-select: none;
+  padding-right: var(--sp-3);
+  margin-right: var(--sp-3);
+  border-right: 1px solid var(--code-border);
+  text-align: right;
+}
+
+/* ---------- Chroma 语法着色（浅色） ---------- */
+.chroma .c, .chroma .ch, .chroma .cm, .chroma .cpf, .chroma .c1, .chroma .cs { color: var(--syn-comment); font-style: italic; }
+.chroma .k, .chroma .kc, .chroma .kd, .chroma .kn, .chroma .kp, .chroma .kr, .chroma .kt { color: var(--syn-keyword); font-weight: 600; }
+.chroma .s, .chroma .sa, .chroma .sb, .chroma .sc, .chroma .dl, .chroma .sd, .chroma .s2,
+.chroma .se, .chroma .sh, .chroma .si, .chroma .sx, .chroma .sr, .chroma .s1, .chroma .ss { color: var(--syn-string); }
+.chroma .m, .chroma .mb, .chroma .mf, .chroma .mh, .chroma .mi, .chroma .il, .chroma .mo { color: var(--syn-number); }
+.chroma .nf, .chroma .fm { color: var(--syn-function); }
+.chroma .nc, .chroma .nn { color: var(--syn-type); font-weight: 600; }
+.chroma .nt { color: var(--syn-type); }
+.chroma .nb, .chroma .bp { color: var(--syn-builtin); }
+.chroma .n, .chroma .na, .chroma .no, .chroma .nd, .chroma .ni, .chroma .ne,
+.chroma .nl, .chroma .nv, .chroma .vc, .chroma .vg, .chroma .vi, .chroma .vm { color: var(--syn-variable); }
+.chroma .o, .chroma .ow { color: var(--syn-operator); font-weight: 600; }
+.chroma .p { color: var(--syn-punct); }
+.chroma .ge { font-style: italic; }
+.chroma .gs { font-weight: 700; }
+.chroma .gd { color: #cf222e; background-color: rgba(255, 129, 130, 0.16); }
+.chroma .gi { color: #1a7f37; background-color: rgba(74, 194, 107, 0.16); }
+.chroma .gh { color: var(--text-3); }
+.chroma .gu { color: var(--text-3); text-decoration: underline; }
+.chroma .gl { text-decoration: underline; }
+.chroma .gr { color: var(--syn-keyword); }
+.chroma .err { color: #b42318; background-color: rgba(255, 129, 130, 0.3); }
+.chroma .w { color: var(--text-3); }
+
+/* 深色模式下差异高亮微调 */
+html[data-theme="dark"] .chroma .gd { color: #ffa198; background-color: rgba(248, 81, 73, 0.2); }
+html[data-theme="dark"] .chroma .gi { color: #7ee787; background-color: rgba(46, 160, 67, 0.2); }
+html[data-theme="dark"] .chroma .err { color: #ffa198; background-color: rgba(248, 81, 73, 0.25); }

@@ -1,0 +1,27 @@
+{{- /* 分页组件（上下文：Paginator） */ -}}
+{{- with . -}}
+{{- if gt .TotalPages 1 -}}
+<nav class="pagination" aria-label="Pagination">
+  {{- if .HasPrev -}}
+  <a href="{{ .Prev.URL }}" aria-label="{{ i18n "prevPage" }}"><svg style="width:16px;height:16px"><use href="#icon-chevron-left"></use></svg></a>
+  {{- end -}}
+  {{- $window := 1 -}}
+  {{- $last := 0 -}}
+  {{- range .Pagers -}}
+    {{- $show := or (eq .PageNumber 1) (eq .PageNumber $.TotalPages) (and (ge .PageNumber (sub $.PageNumber $window)) (le .PageNumber (add $.PageNumber $window))) -}}
+    {{- if and $show (gt .PageNumber (add $last 1)) -}}<span class="page-gap">…</span>{{- end -}}
+    {{- if $show -}}
+      {{- if eq .PageNumber $.PageNumber -}}
+      <span class="page-current" aria-current="page">{{ .PageNumber }}</span>
+      {{- else -}}
+      <a href="{{ .URL }}" aria-label="Page {{ .PageNumber }}">{{ .PageNumber }}</a>
+      {{- end -}}
+      {{- $last = .PageNumber -}}
+    {{- end -}}
+  {{- end -}}
+  {{- if .HasNext -}}
+  <a href="{{ .Next.URL }}" aria-label="{{ i18n "nextPage" }}"><svg style="width:16px;height:16px"><use href="#icon-chevron-right"></use></svg></a>
+  {{- end -}}
+</nav>
+{{- end -}}
+{{- end -}}

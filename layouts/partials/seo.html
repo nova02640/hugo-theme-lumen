@@ -1,0 +1,83 @@
+{{- /* 全套 SEO：标题、描述、canonical、OG、Twitter Card、JSON-LD、RSS */ -}}
+{{- $page := . -}}
+{{- $site := .Site -}}
+{{- $title := cond .IsHome $site.Title (printf "%s · %s" .Title $site.Title) -}}
+{{- $desc := "" -}}
+{{- if .Description -}}{{- $desc = .Description -}}
+{{- else if .IsHome -}}{{- $desc = $site.Params.description -}}
+{{- else if .Summary -}}{{- $desc = .Summary | plainify | truncate 160 -}}
+{{- else -}}{{- $desc = $site.Params.description -}}{{- end -}}
+
+<title>{{ $title }}</title>
+<meta name="description" content="{{ $desc }}">
+{{- if .Params.tags -}}<meta name="keywords" content="{{ delimit .Params.tags ", " }}">{{- end }}
+<link rel="canonical" href="{{ .Permalink }}">
+{{- range .Translations }}<link rel="alternate" hreflang="{{ .Lang }}" href="{{ .Permalink }}">{{ end }}
+
+{{- /* RSS / 备选输出 */ -}}
+{{- range .AlternativeOutputFormats -}}
+<link rel="{{ .Rel }}" type="{{ .MediaType.Type }}" href="{{ .Permalink }}" title="{{ $site.Title }}">
+{{- end -}}
+
+{{- /* Open Graph */ -}}
+<meta property="og:site_name" content="{{ $site.Title }}">
+<meta property="og:title" content="{{ $title }}">
+<meta property="og:description" content="{{ $desc }}">
+<meta property="og:url" content="{{ .Permalink }}">
+<meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}">
+{{- $locale := "zh_CN" -}}
+{{- if eq .Lang "en" }}{{- $locale = "en_US" }}{{ end }}
+<meta property="og:locale" content="{{ $locale }}">
+
+{{- /* OG 社交卡片图：文章封面 > 全局配置 > 主题默认 */ -}}
+{{- $ogImage := "" -}}
+{{- with .Params.cover -}}
+  {{- $res := $.Resources.GetMatch (printf "%s*" .) -}}
+  {{- if $res -}}{{- $ogImage = $res.Permalink -}}
+  {{- else -}}{{- $ogImage = (. | absURL) -}}{{- end -}}
+{{- end -}}
+{{- if not $ogImage -}}{{- with $site.Params.ogImage -}}{{- $ogImage = (. | absURL) -}}{{- end -}}{{- end -}}
+{{- if not $ogImage -}}{{- $ogImage = ("icons/icon-512.png" | absURL) -}}{{- end -}}
+<meta property="og:image" content="{{ $ogImage }}">
+
+{{- /* Twitter Card */ -}}
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{ $title }}">
+<meta name="twitter:description" content="{{ $desc }}">
+<meta name="twitter:image" content="{{ $ogImage }}">
+
+{{- /* 主题色（跟随系统明暗） */ -}}
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#fafaf7">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#14161a">
+
+{{- /* 文章级元信息 */ -}}
+{{- if and .IsPage (not .IsHome) -}}
+<meta property="article:published_time" content="{{ .Date.Format "2006-01-02T15:04:05-07:00" }}">
+{{- with .Lastmod -}}<meta property="article:modified_time" content="{{ .Format "2006-01-02T15:04:05-07:00" }}">{{- end }}
+{{- with .Section -}}<meta property="article:section" content="{{ . }}">{{- end }}
+{{- with .Params.tags -}}{{- range . -}}<meta property="article:tag" content="{{ . }}">{{- end -}}{{- end -}}
+{{- end -}}
+
+{{- /* JSON-LD 结构化数据 */ -}}
+{{- if .IsHome -}}
+<script type="application/ld+json">
+{{ dict "@context" "https://schema.org" "@type" "WebSite" "name" $site.Title "url" $site.BaseURL "description" $desc | jsonify | safeJS }}
+</script>
+{{- else if .IsPage -}}
+<script type="application/ld+json">
+{{ dict
+  "@context" "https://schema.org"
+  "@type" "BlogPosting"
+  "headline" .Title
+  "description" $desc
+  "url" .Permalink
+  "datePublished" .Date
+  "dateModified" (.Lastmod | default .Date)
+  "mainEntityOfPage" .Permalink
+  "inLanguage" .Site.Language.Lang
+  "author" (dict "@type" "Person" "name" ($site.Params.author.name | default $site.Title))
+  "publisher" (dict "@type" "Organization" "name" $site.Title "url" $site.BaseURL)
+  "image" $ogImage
+| jsonify | safeJS }}
+</script>
+{{- end -}}

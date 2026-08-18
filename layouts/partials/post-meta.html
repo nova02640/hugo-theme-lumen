@@ -1,0 +1,47 @@
+{{- /* 文章元信息：日期 / 字数 / 阅读时长 / 分类 / 标签 */ -}}
+<div class="post-meta">
+  {{- if not .Date.IsZero -}}
+  <span class="meta-item" title="{{ i18n "published" }}">
+    <svg><use href="#icon-calendar"></use></svg>
+    <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006-01-02" }}</time>
+  </span>
+  {{- end -}}
+
+  {{- if and .Lastmod (ne .Lastmod .Date) -}}
+  <span class="meta-item" title="{{ i18n "updated" }}">
+    <svg><use href="#icon-clock"></use></svg>
+    <time datetime="{{ .Lastmod.Format "2006-01-02" }}">{{ .Lastmod.Format "2006-01-02" }}</time>
+  </span>
+  {{- end -}}
+
+  {{- if .Site.Params.showReadingTime -}}
+  {{- $words := .WordCount -}}
+  {{- $speed := .Site.Params.readingSpeed | default 400 -}}
+  {{- $mins := int (math.Ceil (div $words $speed)) -}}
+  {{- if eq $mins 0 }}{{ $mins = 1 }}{{ end -}}
+  <span class="meta-item" title="{{ i18n "readingTime" $mins }}">
+    <svg><use href="#icon-clock"></use></svg>{{ i18n "readingTime" $mins }}
+  </span>
+  {{- end -}}
+
+  {{- if .Site.Params.showWordCount -}}
+  <span class="meta-item" title="{{ i18n "wordCountLabel" }}">
+    <svg><use href="#icon-info"></use></svg>{{ i18n "wordCount" (lang.FormatNumberCustom 0 .WordCount) }}
+  </span>
+  {{- end -}}
+
+  {{- with .Params.categories -}}
+  <span class="meta-item">
+    <svg><use href="#icon-folder"></use></svg>
+    {{- range $i, $c := . -}}{{ if $i }}<span class="meta-sep">/</span>{{ end }}<a href="{{ "/categories/" | relLangURL }}{{ $c | urlize }}">{{ $c }}</a>{{- end -}}
+  </span>
+  {{- end -}}
+
+  {{- with .Params.tags -}}
+  <ul class="tag-list" aria-label="Tags">
+    {{- range . -}}
+    <li><a href="{{ "/tags/" | relLangURL }}{{ . | urlize }}"><svg style="width:11px;height:11px;display:inline-block;vertical-align:-1px"><use href="#icon-tag"></use></svg>{{ . }}</a></li>
+    {{- end -}}
+  </ul>
+  {{- end -}}
+</div>

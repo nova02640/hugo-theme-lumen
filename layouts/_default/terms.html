@@ -1,0 +1,46 @@
+{{- /* 分类 / 标签聚合页：标签云按词频缩放，分类卡片网格 */ -}}
+{{ define "main" }}
+{{- partial "breadcrumbs.html" . -}}
+
+<section class="section-header">
+  <h1>{{ .Title }}</h1>
+  {{- with .Data.Terms -}}
+  <span class="list-count">{{ i18n "totalTerms" (len .) }}</span>
+  {{- end -}}
+</section>
+
+{{- with .Content -}}
+<div class="list-description">{{ . }}</div>
+{{- end -}}
+
+{{- if eq .Data.Plural "tags" -}}
+{{- $terms := .Data.Terms.ByCount -}}
+{{- $max := 0 -}}{{- $min := 100000 -}}
+{{- range $terms -}}
+  {{- if gt .Count $max }}{{ $max = .Count }}{{ end -}}
+  {{- if lt .Count $min }}{{ $min = .Count }}{{ end -}}
+{{- end -}}
+{{- $spread := sub $max $min -}}
+{{- if eq $spread 0 }}{{ $spread = 1 }}{{ end -}}
+<div class="terms-cloud">
+  {{- range $terms -}}
+  {{- $w := div (float (sub .Count $min)) (float $spread) -}}
+  <a href="{{ .Page.RelPermalink }}" style="font-size: {{ add 0.85 (mul $w 0.65) }}rem">
+    {{ .Page.Title }}<span class="term-count">{{ .Count }}</span>
+  </a>
+  {{- end -}}
+</div>
+{{- else -}}
+<div class="category-grid">
+  {{- range .Data.Terms.ByCount -}}
+  <a class="category-card" href="{{ .Page.RelPermalink }}">
+    <span class="cat-name">{{ .Page.Title }}</span>
+    {{- with .Page.Params.description -}}
+    <span class="cat-desc">{{ . }}</span>
+    {{- end -}}
+    <span class="cat-count">{{ i18n "postCount" .Count }}</span>
+  </a>
+  {{- end -}}
+</div>
+{{- end -}}
+{{ end }}

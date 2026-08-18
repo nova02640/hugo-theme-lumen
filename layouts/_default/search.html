@@ -1,0 +1,18 @@
+{{- /* 专属搜索页：Fuse.js 客户端全文检索 */ -}}
+{{ define "main" }}
+<section class="search-hero">
+  <h1>{{ .Title }}</h1>
+  <div class="search-box">
+    <svg><use href="#icon-search"></use></svg>
+    <input id="search-input" type="search" placeholder="{{ i18n "searchPlaceholder" }}" autocomplete="off" spellcheck="false" aria-label="{{ i18n "search" }}" data-index="{{ "index.json" | relURL }}">
+  </div>
+  <p class="search-hint">{{ i18n "searchHint" | safeHTML }}</p>
+</section>
+<div id="search-results" class="search-results" aria-live="polite"></div>
+{{ end }}
+
+{{ define "extra-scripts" }}
+{{- $search := resources.Get "js/search.js" | minify | fingerprint -}}
+<script src="{{ (resources.Get "js/vendor/fuse.js").RelPermalink }}" defer></script>
+<script src="{{ $search.RelPermalink }}" integrity="{{ $search.Data.Integrity }}" defer></script>
+{{ end }}

@@ -1,0 +1,35 @@
+{{- /*
+  图片注释短代码：
+  {{< figure src="cover.png" caption="图注（支持 Markdown）" alt="替代文本" width="1440" lightbox="true" >}}
+  src 优先按页面资源解析，自动生成 WebP + srcset 响应式
+*/ -}}
+{{- $src := .Get "src" -}}
+{{- $caption := .Get "caption" -}}
+{{- $alt := .Get "alt" | default ($caption | plainify) | default "" -}}
+{{- $maxW := int (.Get "width" | default "1440") -}}
+{{- $lightbox := eq (.Get "lightbox" | default "false") "true" -}}
+{{- $res := .Page.Resources.GetMatch $src -}}
+<figure class="shortcode-figure">
+  {{- if and $res (ne $res.MediaType.SubType "svg") -}}
+    {{- $full := $res -}}
+    {{- if gt $res.Width $maxW }}{{ $full = $res.Resize (printf "%dx webp q85" $maxW) }}{{ end -}}
+    {{- $s1 := $res.Resize "480x webp q80" -}}
+    {{- $s2 := $res.Resize "800x webp q80" -}}
+    {{- $s3 := $res.Resize "1200x webp q80" -}}
+    {{- $imgTag := printf `<img src="%s" srcset="%s 480w, %s 800w, %s 1200w" sizes="(max-width: 767px) 100vw, 720px" alt="%s" loading="lazy" decoding="async" width="%d" height="%d">` $full.RelPermalink $s1.RelPermalink $s2.RelPermalink $s3.RelPermalink ($alt | htmlEscape) $full.Width $full.Height -}}
+    {{- if $lightbox -}}
+    <a href="{{ $full.RelPermalink }}" data-lightbox="{{ $full.RelPermalink }}" data-caption="{{ $caption | plainify | htmlEscape }}">{{ $imgTag | safeHTML }}</a>
+    {{- else -}}
+    {{ $imgTag | safeHTML }}
+    {{- end -}}
+  {{- else -}}
+    {{- if $lightbox -}}
+    <a href="{{ $src | safeURL }}" data-lightbox="{{ $src | safeURL }}" data-caption="{{ $caption | plainify | htmlEscape }}"><img src="{{ $src | safeURL }}" alt="{{ $alt }}" loading="lazy" decoding="async"></a>
+    {{- else -}}
+    <img src="{{ $src | safeURL }}" alt="{{ $alt }}" loading="lazy" decoding="async">
+    {{- end -}}
+  {{- end -}}
+  {{- with $caption -}}
+  <figcaption>{{ . | markdownify }}</figcaption>
+  {{- end -}}
+</figure>

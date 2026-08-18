@@ -1,0 +1,23 @@
+{{- /* 封面图：Hugo 图像处理生成 WebP + srcset 响应式 */ -}}
+{{- $page := .page -}}
+{{- $featured := .featured | default false -}}
+{{- $alt := .alt | default $page.Title -}}
+{{- $res := false -}}
+{{- with $page.Params.cover -}}
+  {{- with $page.Resources.GetMatch (printf "%s*" .) -}}{{- $res = . -}}{{- end -}}
+{{- end -}}
+{{- if $res -}}
+  {{- if $featured -}}
+    {{- $s1 := $res.Fill "640x275 center webp q80" -}}
+    {{- $s2 := $res.Fill "960x411 center webp q80" -}}
+    {{- $s3 := $res.Fill "1280x549 center webp q80" -}}
+    <img src="{{ $s2.RelPermalink }}" srcset="{{ $s1.RelPermalink }} 640w, {{ $s2.RelPermalink }} 960w, {{ $s3.RelPermalink }} 1280w" sizes="(max-width: 767px) 100vw, 720px" alt="{{ $alt }}" loading="lazy" decoding="async" width="{{ $s2.Width }}" height="{{ $s2.Height }}">
+  {{- else -}}
+    {{- $s1 := $res.Fill "480x320 center webp q80" -}}
+    {{- $s2 := $res.Fill "720x480 center webp q80" -}}
+    {{- $s3 := $res.Fill "960x640 center webp q80" -}}
+    <img src="{{ $s2.RelPermalink }}" srcset="{{ $s1.RelPermalink }} 480w, {{ $s2.RelPermalink }} 720w, {{ $s3.RelPermalink }} 960w" sizes="(max-width: 767px) 100vw, 480px" alt="{{ $alt }}" loading="lazy" decoding="async" width="{{ $s2.Width }}" height="{{ $s2.Height }}">
+  {{- end -}}
+{{- else -}}
+  <img src="{{ $page.Params.cover | relURL }}" alt="{{ $alt }}" loading="lazy" decoding="async">
+{{- end -}}

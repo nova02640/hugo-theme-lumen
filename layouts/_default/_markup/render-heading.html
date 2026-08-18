@@ -1,0 +1,5 @@
+{{- /* 标题渲染：生成锚点 ID（供目录跳转与悬停复制链接） */ -}}
+<h{{ .Level }} id="{{ .Anchor | safeURL }}" class="heading">
+  {{ .Text | safeHTML }}
+  <a class="heading-anchor" href="#{{ .Anchor }}" aria-label="{{ i18n "permalink" }}">#</a>
+</h{{ .Level }}>

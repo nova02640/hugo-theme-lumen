@@ -1,0 +1,19 @@
+{{- /* 相关文章推荐 */ -}}
+{{- $page := . -}}
+{{- $related := site.RegularPages.Related $page | first 4 -}}
+{{- if not $related -}}
+  {{- $related = where (where site.RegularPages "Section" $page.Section) "RelPermalink" "ne" $page.RelPermalink | first 4 -}}
+{{- end -}}
+{{- if $related -}}
+<section class="related-section">
+  <h2>{{ i18n "relatedPosts" }}</h2>
+  <div class="related-list">
+    {{- range $related -}}
+    <a href="{{ .RelPermalink }}">
+      <span>{{ .Title }}</span>
+      <time class="related-date" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006-01-02" }}</time>
+    </a>
+    {{- end -}}
+  </div>
+</section>
+{{- end -}}

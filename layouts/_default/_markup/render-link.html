@@ -1,0 +1,5 @@
+{{- /* 链接渲染：外链新窗口 + 安全属性 */ -}}
+{{- $dest := .Destination -}}
+{{- $isExternal := or (strings.HasPrefix $dest "http://") (strings.HasPrefix $dest "https://") -}}
+{{- $isMail := strings.HasPrefix $dest "mailto:" -}}
+<a href="{{ $dest | safeURL }}"{{ if and $isExternal (not $isMail) }} target="_blank" rel="noopener noreferrer" class="external-link"{{ end }}{{ with .Title }} title="{{ . }}"{{ end }}>{{ .Text | safeHTML }}</a>

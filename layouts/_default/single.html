@@ -1,0 +1,54 @@
+{{- /* 文章详情页：头部信息 → 正文 → 底部交互区 */ -}}
+{{ define "main" }}
+{{- $showToc := .Site.Params.showToc | default true -}}
+{{- with .Params.toc }}{{ $showToc = . }}{{ end -}}
+{{- $toc := .TableOfContents -}}
+{{- $hasToc := and $showToc (ne (strings.TrimSpace $toc) "") -}}
+
+<div class="single-layout">
+  <article class="single-main">
+    {{- partial "breadcrumbs.html" . -}}
+
+    <header class="article-header">
+      <h1>{{ .Title }}</h1>
+      {{- partial "post-meta.html" . -}}
+    </header>
+
+    {{- with .Params.cover -}}
+    {{- $res := $.Resources.GetMatch (printf "%s*" .) -}}
+    {{- if $res -}}
+    <div class="article-cover">
+      {{- $img := $res -}}
+      {{- if gt $res.Width 1600 }}{{ $img = $res.Resize "1600x webp q85" }}{{ end -}}
+      <img src="{{ $img.RelPermalink }}" alt="{{ $.Title }}" loading="lazy" decoding="async" width="{{ $img.Width }}" height="{{ $img.Height }}">
+    </div>
+    {{- else -}}
+    <div class="article-cover">
+      <img src="{{ . | relURL }}" alt="{{ $.Title }}" loading="lazy" decoding="async">
+    </div>
+    {{- end -}}
+    {{- end -}}
+
+    <div class="article-content" id="article-body" {{- with .Params.password }} data-password="{{ . | htmlEscape }}"{{ end -}}>
+      {{ .Content }}
+    </div>
+
+    <footer class="article-footer">
+      {{- partial "license.html" . -}}
+      {{- partial "post-nav.html" . -}}
+      {{- partial "related.html" . -}}
+      {{- partial "comments.html" . -}}
+    </footer>
+  </article>
+
+  {{- if $hasToc -}}
+  <aside class="single-sidebar" aria-label="{{ i18n "toc" }}">
+    {{- partial "toc.html" . -}}
+  </aside>
+  {{- end -}}
+</div>
+
+{{- if $hasToc -}}
+{{- partial "toc-drawer.html" . -}}
+{{- end -}}
+{{ end }}

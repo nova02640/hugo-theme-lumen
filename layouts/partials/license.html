@@ -1,0 +1,13 @@
+{{- /* 版权声明（配置开关） */ -}}
+{{- with .Site.Params.license -}}
+{{- if .enabled -}}
+<div class="article-license">
+  <span class="license-title">{{ i18n "licenseTitle" }}</span>
+  {{- if .url -}}
+  <a href="{{ .url }}" target="_blank" rel="license noopener noreferrer">{{ .name | default .text }}</a>
+  {{- else -}}
+  <span>{{ .text }}</span>
+  {{- end -}}
+</div>
+{{- end -}}
+{{- end -}}

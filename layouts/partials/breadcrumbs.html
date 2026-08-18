@@ -1,0 +1,28 @@
+{{- /* 层级面包屑：首页 / 分类 / 文章 */ -}}
+{{- if and .Site.Params.showBreadcrumb (not .IsHome) -}}
+<nav aria-label="Breadcrumb">
+  <ol class="breadcrumbs">
+    <li>
+      <a href="{{ .Site.Home.RelPermalink }}"><svg><use href="#icon-home"></use></svg>{{ i18n "home" }}</a>
+    </li>
+    {{- if eq .Kind "term" -}}
+    <li><svg><use href="#icon-chevron-right"></use></svg><a href="{{ .Data.Plural | relLangURL }}/">{{ i18n .Data.Plural }}</a></li>
+    <li><svg><use href="#icon-chevron-right"></use></svg><span class="current">{{ .Title }}</span></li>
+    {{- else if eq .Kind "taxonomy" -}}
+    <li><svg><use href="#icon-chevron-right"></use></svg><span class="current">{{ .Title }}</span></li>
+    {{- else if eq .Kind "section" -}}
+    <li><svg><use href="#icon-chevron-right"></use></svg><span class="current">{{ .Title }}</span></li>
+    {{- else -}}
+      {{- with .Section -}}
+      {{- $sec := site.GetPage . -}}
+      {{- if $sec -}}
+      <li><svg><use href="#icon-chevron-right"></use></svg><a href="{{ $sec.RelPermalink }}">{{ with $sec.Title }}{{ . }}{{ else }}{{ $sec.Section | humanize }}{{ end }}</a></li>
+      {{- end -}}
+      {{- end -}}
+      {{- if .IsPage -}}
+      <li><svg><use href="#icon-chevron-right"></use></svg><span class="current">{{ .Title }}</span></li>
+      {{- end -}}
+    {{- end -}}
+  </ol>
+</nav>
+{{- end -}}

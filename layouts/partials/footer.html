@@ -1,0 +1,26 @@
+{{- /* 页脚：社交 + 版权 + 驱动信息 */ -}}
+<footer class="site-footer">
+  <div class="container footer-inner">
+    {{- with .Site.Params.social -}}
+    <div class="footer-social">
+      {{- range . -}}
+      <a href="{{ .url }}" target="_blank" rel="noopener noreferrer me" aria-label="{{ .name }}" title="{{ .name }}">
+        {{- partial "social-icon.html" .name -}}
+      </a>
+      {{- end -}}
+    </div>
+    {{- end -}}
+
+    <div class="footer-copyright">
+      {{ .Site.Params.copyright | default (printf "© %d %s" now.Year .Site.Title) | markdownify }}
+    </div>
+
+    <div class="footer-powered">
+      <span>{{ i18n "poweredBy" | safeHTML }}</span>
+      <a href="{{ "index.xml" | relLangURL }}" aria-label="RSS">
+        <svg style="width:14px;height:14px;display:inline-block;vertical-align:-2px"><use href="#icon-rss"></use></svg>
+        RSS
+      </a>
+    </div>
+  </div>
+</footer>

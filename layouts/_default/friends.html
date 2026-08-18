@@ -1,0 +1,53 @@
+{{- /* 友链页：统一卡片样式（头像 / 昵称 / 简介）
+   数据源：data/friends.toml（[[friends]] 数组）
+   兼容 data/friends.yaml（顶层裸列表）两种写法 */ -}}
+{{ define "main" }}
+{{- partial "breadcrumbs.html" . -}}
+
+<section class="section-header">
+  <h1>{{ .Title }}</h1>
+</section>
+
+{{- with .Content -}}
+<div class="list-description">{{ . }}</div>
+{{- end -}}
+
+{{- $friends := hugo.Data.friends -}}
+{{- if and (reflect.IsMap $friends) (isset $friends "friends") -}}
+  {{- $friends = index $friends "friends" -}}
+{{- end -}}
+{{- if $friends -}}
+<div class="friends-grid">
+  {{- range $friend := $friends -}}
+  {{- $url := index $friend "url" -}}
+  {{- $name := index $friend "name" -}}
+  {{- $avatar := index $friend "avatar" -}}
+  {{- $intro := index $friend "intro" -}}
+  <a class="friend-card" href="{{ $url }}" target="_blank" rel="noopener noreferrer">
+    {{- with $avatar -}}
+    <img src="{{ . | relURL }}" alt="{{ $name }}" loading="lazy" decoding="async" width="52" height="52">
+    {{- end -}}
+    <span class="friend-info">
+      <span class="friend-name">
+        {{ $name }}
+        <svg><use href="#icon-external"></use></svg>
+      </span>
+      {{- with $intro -}}
+      <span class="friend-intro">{{ . }}</span>
+      {{- end -}}
+    </span>
+  </a>
+  {{- end -}}
+</div>
+{{- else -}}
+<div class="friends-empty">
+  <p>{{ i18n "friendsEmpty" }}</p>
+  <pre><code># data/friends.toml
+[[friends]]
+name = "示例博客"
+url = "https://example.com"
+avatar = "/avatar.png"
+intro = "一句简介"</code></pre>
+</div>
+{{- end -}}
+{{ end }}

@@ -1,0 +1,29 @@
+{{- /* 评论系统：Giscus（默认）/ Waline / Disqus，滚动至可视区域后懒加载 */ -}}
+{{- $enabled := .Site.Params.enableComments -}}
+{{- with .Params.comments }}{{ $enabled = . }}{{ end -}}
+{{- if $enabled -}}
+<section class="comments-section" aria-label="{{ i18n "comments" }}">
+  <h2>{{ i18n "comments" }}</h2>
+  {{- $engine := .Site.Params.comments.engine | default "giscus" -}}
+  {{- if eq $engine "giscus" -}}
+  <div id="comments" class="giscus" data-engine="giscus"
+    data-repo="{{ .Site.Params.giscus.repo }}"
+    data-repo-id="{{ .Site.Params.giscus.repoId }}"
+    data-category="{{ .Site.Params.giscus.category }}"
+    data-category-id="{{ .Site.Params.giscus.categoryId }}"
+    data-mapping="{{ .Site.Params.giscus.mapping | default "pathname" }}"
+    data-reactions="{{ .Site.Params.giscus.reactions | default "1" }}"
+    data-emit-metadata="{{ .Site.Params.giscus.emitMetadata | default "0" }}"
+    data-input-position="{{ .Site.Params.giscus.inputPosition | default "top" }}"
+    data-lang="{{ .Site.Params.giscus.lang | default .Site.Language.Lang }}"></div>
+  {{- else if eq $engine "waline" -}}
+  <div id="comments" class="waline" data-engine="waline" data-serverurl="{{ .Site.Params.waline.serverURL }}" data-lang="{{ .Site.Language.Lang }}">
+    <div id="waline"></div>
+  </div>
+  {{- else if eq $engine "disqus" -}}
+  <div id="comments" class="disqus" data-engine="disqus" data-shortname="{{ .Site.Params.disqus.shortname }}">
+    <div id="disqus_thread"></div>
+  </div>
+  {{- end -}}
+</section>
+{{- end -}}

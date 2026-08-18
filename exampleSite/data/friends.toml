@@ -1,0 +1,36 @@
+# 友链数据：在站点同名目录添加 data/friends.toml 即可覆盖
+[[friends]]
+name = "纸飞机博客"
+url = "https://example.com"
+avatar = "/avatars/f1.png"
+intro = "专注前端工程化与性能优化"
+
+[[friends]]
+name = "山丘笔记"
+url = "https://example.com"
+avatar = "/avatars/f2.png"
+intro = "云原生与基础设施实践记录"
+
+[[friends]]
+name = "码上花开"
+url = "https://example.com"
+avatar = "/avatars/f3.png"
+intro = "算法、竞赛与程序人生"
+
+[[friends]]
+name = "拾光集"
+url = "https://example.com"
+avatar = "/avatars/f4.png"
+intro = "摄影与生活随笔"
+
+[[friends]]
+name = "深海电波"
+url = "https://example.com"
+avatar = "/avatars/f5.png"
+intro = "无线电与嵌入式开发"
+
+[[friends]]
+name = "竹简小筑"
+url = "https://example.com"
+avatar = "/avatars/f6.png"
+intro = "古典文学与现代技术交会处"

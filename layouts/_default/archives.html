@@ -1,0 +1,31 @@
+{{- /* 归档页：按年 / 月时间轴分组 */ -}}
+{{ define "main" }}
+{{- partial "breadcrumbs.html" . -}}
+
+<section class="section-header">
+  <h1>{{ .Title }}</h1>
+</section>
+
+{{- with .Content -}}
+<div class="list-description">{{ . }}</div>
+{{- end -}}
+
+{{- $posts := where site.RegularPages "Section" "in" site.MainSections -}}
+{{- if $posts -}}
+{{- range $posts.GroupByDate "2006" -}}
+<h2 class="archive-year">{{ .Key }}</h2>
+{{- range .Pages.GroupByDate "2006-01" -}}
+{{- $month := slicestr .Key 5 7 -}}
+<h3 class="archive-month">{{ i18n (printf "month_%s" $month) }} <span class="list-count">{{ i18n "postCount" (len .Pages) }}</span></h3>
+{{- range .Pages -}}
+<div class="archive-item">
+  <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006-01-02" }}</time>
+  <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+</div>
+{{- end -}}
+{{- end -}}
+{{- end -}}
+{{- else -}}
+<div class="list-description">{{ i18n "noPosts" }}</div>
+{{- end -}}
+{{ end }}

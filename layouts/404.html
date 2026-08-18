@@ -1,0 +1,8 @@
+{{- /* 404 页 */ -}}
+{{ define "main" }}
+<section class="error-page">
+  <div class="error-code">404</div>
+  <p>{{ i18n "pageNotFound" }}</p>
+  <a class="btn" href="{{ .Site.Home.RelPermalink }}">{{ i18n "backHome" }}</a>
+</section>
+{{ end }}

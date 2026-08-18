@@ -1,0 +1,6 @@
+{{- /* 图片渲染：懒加载 + 页面资源时补全尺寸（减少布局偏移） */ -}}
+{{- $alt := .PlainText -}}
+{{- $w := 0 }}{{ $h := 0 -}}
+{{- with .Page.Resources.GetMatch .Destination -}}{{- $w = .Width }}{{ $h = .Height }}{{- end -}}
+<img src="{{ .Destination | safeURL }}" alt="{{ $alt }}" loading="lazy" decoding="async"
+{{- if and (gt $w 0) (gt $h 0) }} width="{{ $w }}" height="{{ $h }}"{{ end -}}>

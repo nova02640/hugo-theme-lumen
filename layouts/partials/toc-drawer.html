@@ -1,0 +1,17 @@
+{{- /* 移动端悬浮目录入口 + 抽屉（<1240px 显示） */ -}}
+{{- $toc := .TableOfContents -}}
+{{- if ne (strings.TrimSpace $toc) "" -}}
+<button id="toc-fab" class="toc-fab" type="button" aria-label="{{ i18n "toc" }}" title="{{ i18n "toc" }}">
+  <svg><use href="#icon-list"></use></svg>
+</button>
+<div id="toc-mask" class="toc-drawer-mask"></div>
+<div id="toc-drawer" class="toc-drawer" role="dialog" aria-label="{{ i18n "toc" }}">
+  <div class="toc">
+    <div class="toc-header">
+      <span>{{ i18n "toc" }}</span>
+      <button id="toc-close" type="button" aria-label="{{ i18n "close" }}"><svg style="width:16px;height:16px"><use href="#icon-x"></use></svg></button>
+    </div>
+    {{ $toc | safeHTML }}
+  </div>
+</div>
+{{- end -}}

@@ -1,0 +1,35 @@
+# Lumen（流明）主题元配置
+# 主题默认值均通过 layouts 内 `default` 函数内置，此处仅声明元信息
+
+name = "Lumen"
+license = "MIT"
+licenselink = "https://github.com/nova02640/hugo-theme-lumen/blob/main/LICENSE"
+description = "现代极简、高性能、开箱即用的 Hugo 技术博客主题：明暗双主题、全文检索、智能目录、代码高亮、SEO 优化。"
+homepage = "https://github.com/nova02640/hugo-theme-lumen"
+tags = ["blog", "minimal", "responsive", "dark-mode", "search", "seo", "chinese", "lightweight"]
+features = [
+  "明暗双主题（亮/暗/自动）",
+  "Fuse.js 全文检索",
+  "智能滚动目录",
+  "Chroma 代码高亮 + 复制/行号",
+  "全套 SEO / OG / JSON-LD",
+  "PWA / 评论 / 单文加密 / 相册 / 友链 / 公告",
+]
+min_version = "0.156.0"
+
+[author]
+name = "Lumen Theme Authors"
+homepage = "https://github.com/nova02640/hugo-theme-lumen"
+
+# theme.toml 的 [params] 仅供示例站参考，
+# 实际生效的默认参数在 layouts 中以 `default` 函数兜底（详见 README「三级配置」）。
+[params]
+defaultTheme = "auto"      # auto / light / dark
+showToc = true
+showReadingTime = true
+showBreadcrumb = true
+homeLayout = "list"        # list / card
+enableSearch = true
+enableComments = false
+enablePWA = false
+enableAnnouncement = false

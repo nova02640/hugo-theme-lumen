@@ -1,0 +1,17 @@
+{{- /* PWA 清单：首页输出格式 manifest 生成 manifest.webmanifest */ -}}
+{
+  "name": "{{ .Site.Title }}",
+  "short_name": "{{ .Site.Params.shortName | default .Site.Title }}",
+  "description": "{{ .Site.Params.description | default .Site.Title }}",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#fafaf7",
+  "theme_color": "#fafaf7",
+  "lang": "{{ .Site.Language.Lang }}",
+  "icons": [
+    { "src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

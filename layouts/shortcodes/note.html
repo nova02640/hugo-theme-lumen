@@ -1,0 +1,15 @@
+{{- /*
+  提示框短代码：
+  {{< note type="info|tip|warn|danger" title="可选标题" >}}内容（支持 Markdown）{{< /note >}}
+*/ -}}
+{{- $type := .Get "type" | default "info" -}}
+{{- $title := .Get "title" -}}
+{{- $icons := dict "info" "icon-info" "tip" "icon-check-circle" "warn" "icon-alert-triangle" "danger" "icon-alert-circle" -}}
+{{- $icon := index $icons $type | default "icon-info" -}}
+<div class="note note-{{ $type }}">
+  <svg><use href="#{{ $icon }}"></use></svg>
+  <div class="note-body">
+    {{- with $title -}}<div class="note-title">{{ . }}</div>{{- end -}}
+    <div>{{ .Inner | markdownify }}</div>
+  </div>
+</div>
