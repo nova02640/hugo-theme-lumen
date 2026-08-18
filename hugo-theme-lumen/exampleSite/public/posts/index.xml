@@ -1,126 +1,27 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Lumen · 流明</title><link>http://localhost/posts/</link><description>Recent content in Posts on Lumen · 流明</description><generator>Hugo</generator><language>zh-cn</language><copyright>© 2026 Lumen. 保留所有权利。</copyright><lastBuildDate>Sun, 15 Feb 2026 10:30:00 +0800</lastBuildDate><atom:link href="http://localhost/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Markdown 基础元素演示</title><link>http://localhost/posts/markdown-features/</link><pubDate>Sun, 15 Feb 2026 10:30:00 +0800</pubDate><guid>http://localhost/posts/markdown-features/</guid><description>&lt;p>本页用于核对 Markdown 元素渲染细节。&lt;/p>
-&lt;h2 id="文本样式">文本样式&lt;/h2>
-&lt;p>正文段落；&lt;strong>加粗&lt;/strong>；&lt;em>斜体&lt;/em>；&lt;del>删除线&lt;/del>；&lt;code>行内代码&lt;/code>；&lt;a href="https://gohugo.io">超链接&lt;/a>。&lt;/p>
-&lt;h2 id="列表">列表&lt;/h2>
-&lt;ul>
-&lt;li>无序项 A&lt;/li>
-&lt;li>无序项 B
-&lt;ul>
-&lt;li>嵌套项 B1&lt;/li>
-&lt;li>嵌套项 B2&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;li>无序项 C&lt;/li>
-&lt;/ul>
-&lt;ol>
-&lt;li>有序项 1&lt;/li>
-&lt;li>有序项 2&lt;/li>
-&lt;li>有序项 3&lt;/li>
-&lt;/ol>
-&lt;h2 id="引用">引用&lt;/h2>
-&lt;blockquote>
-&lt;p>名言第一句。&lt;/p>
-&lt;p>名言第二句。&lt;/p>
-&lt;/blockquote>
-&lt;h2 id="表格">表格&lt;/h2>
-&lt;table>
- &lt;thead>
- &lt;tr>
- &lt;th>字段&lt;/th>
- &lt;th>类型&lt;/th>
- &lt;th>说明&lt;/th>
- &lt;/tr>
- &lt;/thead>
- &lt;tbody>
- &lt;tr>
- &lt;td>&lt;code>id&lt;/code>&lt;/td>
- &lt;td>int&lt;/td>
- &lt;td>主键&lt;/td>
- &lt;/tr>
- &lt;tr>
- &lt;td>&lt;code>name&lt;/code>&lt;/td>
- &lt;td>string&lt;/td>
- &lt;td>名称&lt;/td>
- &lt;/tr>
- &lt;tr>
- &lt;td>&lt;code>created_at&lt;/code>&lt;/td>
- &lt;td>datetime&lt;/td>
- &lt;td>创建时间&lt;/td>
- &lt;/tr>
- &lt;/tbody>
-&lt;/table>
-&lt;h2 id="代码块带行号语义">代码块（带行号语义）&lt;/h2>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">def&lt;/span> &lt;span style="color:#900;font-weight:bold">fib&lt;/span>(n: &lt;span style="color:#0086b3">int&lt;/span>) &lt;span style="color:#000;font-weight:bold">-&amp;gt;&lt;/span> &lt;span style="color:#0086b3">int&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#d14">&amp;#34;&amp;#34;&amp;#34;计算斐波那契数。&amp;#34;&amp;#34;&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> a, b &lt;span style="color:#000;font-weight:bold">=&lt;/span> &lt;span style="color:#099">0&lt;/span>, &lt;span style="color:#099">1&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">for&lt;/span> _ &lt;span style="color:#000;font-weight:bold">in&lt;/span> &lt;span style="color:#0086b3">range&lt;/span>(n):
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> a, b &lt;span style="color:#000;font-weight:bold">=&lt;/span> b, a &lt;span style="color:#000;font-weight:bold">+&lt;/span> b
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">return&lt;/span> a
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="分隔线">分隔线&lt;/h2>
-&lt;hr>
-&lt;h2 id="任务清单">任务清单&lt;/h2>
-&lt;ul>
-&lt;li>&lt;input checked="" disabled="" type="checkbox"> 已完成项&lt;/li>
-&lt;li>&lt;input disabled="" type="checkbox"> 未完成项&lt;/li>
-&lt;li>&lt;input disabled="" type="checkbox"> 另一项&lt;/li>
-&lt;/ul>
-&lt;h2 id="数学与脚注">数学与脚注&lt;/h2>
-&lt;p>文章支持外接 KaTeX/MathJax，这里仅演示普通段落。&lt;/p>
-&lt;p>正文可附脚注&lt;sup id="fnref:1">&lt;a href="#fn:1" class="footnote-ref" role="doc-noteref">1&lt;/a>&lt;/sup>。&lt;/p>
-&lt;p>正文末尾。&lt;/p>
-&lt;div class="footnotes" role="doc-endnotes">
-&lt;hr>
-&lt;ol>
-&lt;li id="fn:1">
-&lt;p>脚注内容。&amp;#160;&lt;a href="#fnref:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
-&lt;/li>
-&lt;/ol>
-&lt;/div></description></item><item><title>欢迎来到 Lumen 主题示例站</title><link>http://localhost/posts/welcome-to-lumen/</link><pubDate>Thu, 01 Jan 2026 09:00:00 +0800</pubDate><guid>http://localhost/posts/welcome-to-lumen/</guid><description>&lt;blockquote>
-&lt;p>&lt;strong>Lumen（流明）&lt;/strong> 是面向技术写作者的极简、高性能、开箱即用 Hugo 博客主题。本站即为示例站点。&lt;/p>
-&lt;/blockquote>
-&lt;p>本文档演示 Lumen 主题的常用功能，方便你快速上手。所有功能均按方案设计实现，无需额外构建链。&lt;/p>
-&lt;h2 id="一视觉与排版">一、视觉与排版&lt;/h2>
-&lt;p>正文以 720px 居中窄屏呈现，行高 1.7，配合 8px 基线网格、单层柔和阴影、统一 8-12px 圆角，兼顾简约质感与专业调性。中英文混排间距经专属优化，避免拥挤。&lt;/p>
-&lt;p>字体使用系统原生字体栈，无外部字体请求，彻底消除 FOIT / FOUT 文字闪烁。&lt;/p>
-&lt;h2 id="二智能自动目录">二、智能自动目录&lt;/h2>
-&lt;p>右侧侧栏自动同步本文层级（方案二·智能自动目录）：&lt;/p>
-&lt;ul>
-&lt;li>滚动实时高亮当前章节&lt;/li>
-&lt;li>支持折叠 / 展开&lt;/li>
-&lt;li>移动端以悬浮入口呈现&lt;/li>
-&lt;/ul>
-&lt;h2 id="三高级代码高亮">三、高级代码高亮&lt;/h2>
-&lt;p>基于 Hugo Chroma 原生高亮，支持 150+ 编程语言、行号开关与一键复制：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">package&lt;/span> main
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">import&lt;/span> &lt;span style="color:#d14">&amp;#34;fmt&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">func&lt;/span> &lt;span style="color:#900;font-weight:bold">main&lt;/span>() {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> fmt.&lt;span style="color:#900;font-weight:bold">Println&lt;/span>(&lt;span style="color:#d14">&amp;#34;Hello, Lumen!&amp;#34;&lt;/span>)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>hugo server -D --bind&lt;span style="color:#000;font-weight:bold">=&lt;/span>0.0.0.0
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>代码块右上角的「复制」按钮（方案二·高级代码高亮）由 &lt;code>main.js&lt;/code> 渐进增强，无 JS 环境下仍可正常浏览。&lt;/p>
-&lt;h2 id="四提示框短代码">四、提示框短代码&lt;/h2>
-&lt;div class="note note--info" role="note">
- &lt;div class="note__title">ℹ️ 提示&lt;/div>
- &lt;div class="note__content">使用 &lt;code>note&lt;/code> 短代码即可生成此提示框，支持 info / warning / error / success 四种语义。&lt;/div>
-&lt;/div>
-
-&lt;div class="note note--warning" role="note">
- &lt;div class="note__title">⚠️ 注意&lt;/div>
- &lt;div class="note__content">深色模式下提示框颜色自动切换，无需任何配置。&lt;/div>
-&lt;/div>
-
-&lt;div class="note note--success" role="note">
- &lt;div class="note__title">✓ 成功&lt;/div>
- &lt;div class="note__content">开箱即用，零依赖构建。&lt;/div>
-&lt;/div>
-
-&lt;h2 id="五图片注释短代码">五、图片注释短代码&lt;/h2>
-&lt;figure class="figure">
- &lt;img src="http://localhost/images/welcome-cover.svg"
- alt="Lumen 主题封面"
- loading="lazy">&lt;figcaption>Lumen 主题封面示意（SVG 占位图）&lt;/figcaption>&lt;/figure>
-
-&lt;h2 id="六明暗双主题">六、明暗双主题&lt;/h2>
-&lt;p>顶部右侧主题切换按钮支持三态循环（方案二·明暗双主题）：&lt;/p></description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on Lumen · 流明</title>
+    <link>http://localhost:1313/posts/</link>
+    <description>Recent content in Posts on Lumen · 流明</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <copyright>© 2026 Lumen. 保留所有权利。</copyright>
+    <lastBuildDate>Sun, 15 Feb 2026 10:30:00 +0800</lastBuildDate>
+    <atom:link href="http://localhost:1313/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Markdown 基础元素演示</title>
+      <link>http://localhost:1313/posts/markdown-features/</link>
+      <pubDate>Sun, 15 Feb 2026 10:30:00 +0800</pubDate>
+      <guid>http://localhost:1313/posts/markdown-features/</guid>
+      <description>&lt;p&gt;本页用于核对 Markdown 元素渲染细节。&lt;/p&gt;&#xA;&lt;h2 id=&#34;文本样式&#34;&gt;文本样式&lt;/h2&gt;&#xA;&lt;p&gt;正文段落；&lt;strong&gt;加粗&lt;/strong&gt;；&lt;em&gt;斜体&lt;/em&gt;；&lt;del&gt;删除线&lt;/del&gt;；&lt;code&gt;行内代码&lt;/code&gt;；&lt;a href=&#34;https://gohugo.io&#34;&gt;超链接&lt;/a&gt;。&lt;/p&gt;&#xA;&lt;h2 id=&#34;列表&#34;&gt;列表&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;无序项 A&lt;/li&gt;&#xA;&lt;li&gt;无序项 B&#xA;&lt;ul&gt;&#xA;&lt;li&gt;嵌套项 B1&lt;/li&gt;&#xA;&lt;li&gt;嵌套项 B2&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;无序项 C&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;有序项 1&lt;/li&gt;&#xA;&lt;li&gt;有序项 2&lt;/li&gt;&#xA;&lt;li&gt;有序项 3&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;h2 id=&#34;引用&#34;&gt;引用&lt;/h2&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;名言第一句。&lt;/p&gt;&#xA;&lt;p&gt;名言第二句。&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;h2 id=&#34;表格&#34;&gt;表格&lt;/h2&gt;&#xA;&lt;table&gt;&#xA;  &lt;thead&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;th&gt;字段&lt;/th&gt;&#xA;          &lt;th&gt;类型&lt;/th&gt;&#xA;          &lt;th&gt;说明&lt;/th&gt;&#xA;      &lt;/tr&gt;&#xA;  &lt;/thead&gt;&#xA;  &lt;tbody&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;&lt;code&gt;id&lt;/code&gt;&lt;/td&gt;&#xA;          &lt;td&gt;int&lt;/td&gt;&#xA;          &lt;td&gt;主键&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;&lt;code&gt;name&lt;/code&gt;&lt;/td&gt;&#xA;          &lt;td&gt;string&lt;/td&gt;&#xA;          &lt;td&gt;名称&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;&lt;code&gt;created_at&lt;/code&gt;&lt;/td&gt;&#xA;          &lt;td&gt;datetime&lt;/td&gt;&#xA;          &lt;td&gt;创建时间&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;  &lt;/tbody&gt;&#xA;&lt;/table&gt;&#xA;&lt;h2 id=&#34;代码块带行号语义&#34;&gt;代码块（带行号语义）&lt;/h2&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#900;font-weight:bold&#34;&gt;fib&lt;/span&gt;(n: &lt;span style=&#34;color:#0086b3&#34;&gt;int&lt;/span&gt;) &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;-&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#0086b3&#34;&gt;int&lt;/span&gt;:&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#d14&#34;&gt;&amp;#34;&amp;#34;&amp;#34;计算斐波那契数。&amp;#34;&amp;#34;&amp;#34;&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    a, b &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#099&#34;&gt;0&lt;/span&gt;, &lt;span style=&#34;color:#099&#34;&gt;1&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;for&lt;/span&gt; _ &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;in&lt;/span&gt; &lt;span style=&#34;color:#0086b3&#34;&gt;range&lt;/span&gt;(n):&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        a, b &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;=&lt;/span&gt; b, a &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;+&lt;/span&gt; b&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;return&lt;/span&gt; a&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;分隔线&#34;&gt;分隔线&lt;/h2&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;任务清单&#34;&gt;任务清单&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;input checked=&#34;&#34; disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 已完成项&lt;/li&gt;&#xA;&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 未完成项&lt;/li&gt;&#xA;&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 另一项&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;数学与脚注&#34;&gt;数学与脚注&lt;/h2&gt;&#xA;&lt;p&gt;文章支持外接 KaTeX/MathJax，这里仅演示普通段落。&lt;/p&gt;&#xA;&lt;p&gt;正文可附脚注&lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;。&lt;/p&gt;&#xA;&lt;p&gt;正文末尾。&lt;/p&gt;&#xA;&lt;div class=&#34;footnotes&#34; role=&#34;doc-endnotes&#34;&gt;&#xA;&lt;hr&gt;&#xA;&lt;ol&gt;&#xA;&lt;li id=&#34;fn:1&#34;&gt;&#xA;&lt;p&gt;脚注内容。&amp;#160;&lt;a href=&#34;#fnref:1&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;/div&gt;</description>
+    </item>
+    <item>
+      <title>欢迎来到 Lumen 主题示例站</title>
+      <link>http://localhost:1313/posts/welcome-to-lumen/</link>
+      <pubDate>Thu, 01 Jan 2026 09:00:00 +0800</pubDate>
+      <guid>http://localhost:1313/posts/welcome-to-lumen/</guid>
+      <description>&lt;blockquote&gt;&#xA;&lt;p&gt;&lt;strong&gt;Lumen（流明）&lt;/strong&gt; 是面向技术写作者的极简、高性能、开箱即用 Hugo 博客主题。本站即为示例站点。&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;p&gt;本文档演示 Lumen 主题的常用功能，方便你快速上手。所有功能均按方案设计实现，无需额外构建链。&lt;/p&gt;&#xA;&lt;h2 id=&#34;一视觉与排版&#34;&gt;一、视觉与排版&lt;/h2&gt;&#xA;&lt;p&gt;正文以 720px 居中窄屏呈现，行高 1.7，配合 8px 基线网格、单层柔和阴影、统一 8-12px 圆角，兼顾简约质感与专业调性。中英文混排间距经专属优化，避免拥挤。&lt;/p&gt;&#xA;&lt;p&gt;字体使用系统原生字体栈，无外部字体请求，彻底消除 FOIT / FOUT 文字闪烁。&lt;/p&gt;&#xA;&lt;h2 id=&#34;二智能自动目录&#34;&gt;二、智能自动目录&lt;/h2&gt;&#xA;&lt;p&gt;右侧侧栏自动同步本文层级（方案二·智能自动目录）：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;滚动实时高亮当前章节&lt;/li&gt;&#xA;&lt;li&gt;支持折叠 / 展开&lt;/li&gt;&#xA;&lt;li&gt;移动端以悬浮入口呈现&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;三高级代码高亮&#34;&gt;三、高级代码高亮&lt;/h2&gt;&#xA;&lt;p&gt;基于 Hugo Chroma 原生高亮，支持 150+ 编程语言、行号开关与一键复制：&lt;/p&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-go&#34; data-lang=&#34;go&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;package&lt;/span&gt; main&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color:#d14&#34;&gt;&amp;#34;fmt&amp;#34;&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;func&lt;/span&gt; &lt;span style=&#34;color:#900;font-weight:bold&#34;&gt;main&lt;/span&gt;() {&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    fmt.&lt;span style=&#34;color:#900;font-weight:bold&#34;&gt;Println&lt;/span&gt;(&lt;span style=&#34;color:#d14&#34;&gt;&amp;#34;Hello, Lumen!&amp;#34;&lt;/span&gt;)&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;hugo server -D --bind&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;=&lt;/span&gt;0.0.0.0&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;代码块右上角的「复制」按钮（方案二·高级代码高亮）由 &lt;code&gt;main.js&lt;/code&gt; 渐进增强，无 JS 环境下仍可正常浏览。&lt;/p&gt;&#xA;&lt;h2 id=&#34;四提示框短代码&#34;&gt;四、提示框短代码&lt;/h2&gt;&#xA;&lt;div class=&#34;note note--info&#34; role=&#34;note&#34;&gt;&#xA;  &lt;div class=&#34;note__title&#34;&gt;ℹ️ 提示&lt;/div&gt;&#xA;  &lt;div class=&#34;note__content&#34;&gt;使用 &lt;code&gt;note&lt;/code&gt; 短代码即可生成此提示框，支持 info / warning / error / success 四种语义。&lt;/div&gt;&#xA;&lt;/div&gt;&#xA;&#xA;&lt;div class=&#34;note note--warning&#34; role=&#34;note&#34;&gt;&#xA;  &lt;div class=&#34;note__title&#34;&gt;⚠️ 注意&lt;/div&gt;&#xA;  &lt;div class=&#34;note__content&#34;&gt;深色模式下提示框颜色自动切换，无需任何配置。&lt;/div&gt;&#xA;&lt;/div&gt;&#xA;&#xA;&lt;div class=&#34;note note--success&#34; role=&#34;note&#34;&gt;&#xA;  &lt;div class=&#34;note__title&#34;&gt;✓ 成功&lt;/div&gt;&#xA;  &lt;div class=&#34;note__content&#34;&gt;开箱即用，零依赖构建。&lt;/div&gt;&#xA;&lt;/div&gt;&#xA;&#xA;&lt;h2 id=&#34;五图片注释短代码&#34;&gt;五、图片注释短代码&lt;/h2&gt;&#xA;&lt;figure class=&#34;figure&#34;&gt;&#xA;  &lt;img src=&#34;http://localhost:1313/images/welcome-cover.svg&#34;&#xA;       alt=&#34;Lumen 主题封面&#34;&#xA;       loading=&#34;lazy&#34;&gt;&lt;figcaption&gt;Lumen 主题封面示意（SVG 占位图）&lt;/figcaption&gt;&lt;/figure&gt;&#xA;&#xA;&lt;h2 id=&#34;六明暗双主题&#34;&gt;六、明暗双主题&lt;/h2&gt;&#xA;&lt;p&gt;顶部右侧主题切换按钮支持三态循环（方案二·明暗双主题）：&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>
