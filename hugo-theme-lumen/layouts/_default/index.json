@@ -1,0 +1,20 @@
+{{- /* index.json —— 搜索索引（方案二·全文检索功能）
+   * 由 search.js 在客户端 fetch 获取，经 Fuse.js 模糊匹配
+   * 输出每篇文章的 permalink / title / summary / content / date / tags
+   * 站点需在 config.toml 开启 JSON 输出格式（见 exampleSite）
+   */ -}}
+{{- $pages := where .Site.RegularPages "Section" "in" (.Site.Params.mainSections | default (slice "posts")) -}}
+[
+{{- range $i, $p := $pages -}}
+{{- if $i }},{{- end -}}
+{
+  "permalink": {{ $p.Permalink | jsonify }},
+  "title": {{ $p.Title | plainify | jsonify }},
+  "summary": {{ ($p.Description | default ($p.Summary | plainify | truncate 200)) | jsonify }},
+  "content": {{ ($p.Plain | plainify | truncate 5000) | jsonify }},
+  "date": {{ $p.Date.Format "2006-01-02T15:04:05Z07:00" | jsonify }},
+  "tags": {{ $p.Params.tags | jsonify }},
+  "categories": {{ $p.Params.categories | jsonify }}
+}
+{{- end -}}
+]

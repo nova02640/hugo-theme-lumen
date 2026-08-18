@@ -1,0 +1,189 @@
+/* ==========================================================================
+   _code.css —— 代码块专属样式（方案二·高级代码高亮）
+   基于 Hugo Chroma 原生高亮；支持一键复制、行号开关、150+ 语言
+   ========================================================================== */
+
+/* —— 行内代码 —— */
+:root {
+  --code-inline-bg: rgba(175, 184, 195, 0.18);
+}
+:root[data-theme="dark"] {
+  --code-inline-bg: rgba(110, 118, 129, 0.4);
+}
+
+.content code {
+  background: var(--code-inline-bg);
+  padding: 0.15em 0.4em;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-mono);
+  font-size: 0.875em;
+  color: var(--fg);
+  word-break: break-word;
+}
+
+/* —— 链接内的行内代码不应有底色 —— */
+.content a code {
+  color: var(--link);
+}
+
+/* —— 代码块容器 —— */
+.code-block {
+  position: relative;
+  margin: var(--space-5) 0;
+  border-radius: var(--radius-lg);
+  background: var(--bg-code);
+  border: 1px solid var(--border);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+.code-block__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-2) var(--space-4);
+  background: var(--bg-subtle);
+  border-bottom: 1px solid var(--border);
+  font-size: 0.8125rem;
+  color: var(--fg-muted);
+  font-family: var(--font-mono);
+}
+
+.code-block__lang {
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
+.code-block__copy {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 2px 8px;
+  font-size: 0.75rem;
+  color: var(--fg-secondary);
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s, background 0.15s;
+}
+.code-block__copy:hover {
+  color: var(--link);
+  border-color: var(--link);
+}
+.code-block__copy svg {
+  width: 14px;
+  height: 14px;
+}
+.code-block__copy.is-copied {
+  color: var(--success);
+  border-color: var(--success);
+}
+
+/* —— 高亮区 —— */
+.highlight {
+  position: relative;
+  margin: 0;
+  padding: var(--space-4);
+  overflow-x: auto;          /* 代码块横向滚动（方案三·正文阅读区）*/
+  background: transparent !important;
+}
+.highlight pre {
+  margin: 0;
+  padding: 0;
+  background: transparent !important;
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  line-height: 1.6;
+  tab-size: 4;
+}
+.highlight code {
+  background: transparent;
+  padding: 0;
+  font-size: inherit;
+  color: var(--fg);
+}
+
+/* —— 行号（支持开关）—— */
+.highlight table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.highlight td {
+  padding: 0;
+  vertical-align: top;
+}
+.highlight .lntd:first-child pre {
+  color: var(--fg-muted);
+  text-align: right;
+  padding-right: var(--space-3);
+  user-select: none;
+  border-right: 1px solid var(--border);
+}
+.highlight .lntd:first-child {
+  white-space: nowrap;
+}
+
+/* ==========================================================================
+   Chroma 高亮 token 配色（轻量自适配明暗，避免依赖额外主题文件）
+   ========================================================================== */
+.chroma { color: var(--fg); }
+.chroma .err { color: var(--error); }
+.chroma .lnlinks { color: inherit; text-decoration: none; }
+.chroma .ln { color: var(--fg-muted); }
+.chroma .lnt { color: var(--fg-muted); }
+.chroma .k, .chroma .kc, .chroma .kd, .chroma .kn, .chroma .kp, .chroma .kr, .chroma .kv { color: #6700b9; font-weight: 600; }
+.chroma .kt, .chroma .nc { color: #7a3e9d; }
+.chroma .o, .chroma .ow { color: #5b6166; }
+.chroma .c, .chroma .ch, .chroma .cm, .chroma .cpf, .chroma .c1 { color: var(--fg-muted); font-style: italic; }
+.chroma .s, .chroma .sa, .chroma .sb, .chroma .sc, .chroma .dl, .chroma .sd, .chroma .s2, .chroma .se, .chroma .sh, .chroma .s1, .chroma .sx { color: #067d17; }
+.chroma .si, .chroma .sr { color: #0086b3; }
+.chroma .m, .chroma .mb, .chroma .mf, .chroma .mh, .chroma .mi, .chroma .il, .chroma .mo { color: #1750eb; }
+.chroma .nf, .chroma .fm { color: #1f6feb; }
+.chroma .nb, .chroma .bp, .chroma .nt { color: #8250df; }
+.chroma .na, .chroma .nv, .chroma .vc, .chroma .vg, .chroma .vi, .chroma .vm { color: #b01a00; }
+.chroma .gd, .chroma .gi { color: inherit; }
+.chroma .gh { color: var(--fg-muted); font-weight: 700; }
+.chroma .gu { color: var(--fg-muted); font-weight: 700; }
+.chroma .nd { color: #5b6166; }
+
+:root[data-theme="dark"] .chroma .k,
+:root[data-theme="dark"] .chroma .kc,
+:root[data-theme="dark"] .chroma .kd,
+:root[data-theme="dark"] .chroma .kn,
+:root[data-theme="dark"] .chroma .kp,
+:root[data-theme="dark"] .chroma .kr,
+:root[data-theme="dark"] .chroma .kv { color: #c792ea; }
+:root[data-theme="dark"] .chroma .kt,
+:root[data-theme="dark"] .chroma .nc { color: #c792ea; }
+:root[data-theme="dark"] .chroma .s,
+:root[data-theme="dark"] .chroma .sa,
+:root[data-theme="dark"] .chroma .sb,
+:root[data-theme="dark"] .chroma .sc,
+:root[data-theme="dark"] .chroma .dl,
+:root[data-theme="dark"] .chroma .sd,
+:root[data-theme="dark"] .chroma .s2,
+:root[data-theme="dark"] .chroma .se,
+:root[data-theme="dark"] .chroma .sh,
+:root[data-theme="dark"] .chroma .s1,
+:root[data-theme="dark"] .chroma .sx { color: #c3e88d; }
+:root[data-theme="dark"] .chroma .m,
+:root[data-theme="dark"] .chroma .mb,
+:root[data-theme="dark"] .chroma .mf,
+:root[data-theme="dark"] .chroma .mh,
+:root[data-theme="dark"] .chroma .mi,
+:root[data-theme="dark"] .chroma .il,
+:root[data-theme="dark"] .chroma .mo { color: #f78c6c; }
+:root[data-theme="dark"] .chroma .nf,
+:root[data-theme="dark"] .chroma .fm { color: #82aaff; }
+:root[data-theme="dark"] .chroma .nb,
+:root[data-theme="dark"] .chroma .bp,
+:root[data-theme="dark"] .chroma .nt { color: #ffcb6b; }
+:root[data-theme="dark"] .chroma .na,
+:root[data-theme="dark"] .chroma .nv,
+:root[data-theme="dark"] .chroma .vc,
+:root[data-theme="dark"] .chroma .vg,
+:root[data-theme="dark"] .chroma .vi,
+:root[data-theme="dark"] .chroma .vm { color: #f07178; }
+:root[data-theme="dark"] .chroma .si,
+:root[data-theme="dark"] .chroma .sr { color: #89ddff; }

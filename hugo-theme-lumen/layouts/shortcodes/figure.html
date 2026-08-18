@@ -1,0 +1,27 @@
+{{- /* shortcodes/figure.html —— 图片注释组件（方案四·自定义短代码·figure）
+   * 用法：{{< figure src="/img/foo.png" alt="替代文本" caption="图片说明" width="640" >}}
+   * 基于 Hugo 原生 image 处理（方案一·技术架构·图片方案）
+   */ -}}
+{{- $src := .Get "src" -}}
+{{- $alt := .Get "alt" | default "" -}}
+{{- $caption := .Get "caption" | default (.Get "title") -}}
+{{- $width := .Get "width" -}}
+{{- $attr := .Get "attr" -}}
+{{- $attrlink := .Get "attrlink" -}}
+<figure class="figure">
+  <img src="{{ $src | relURL }}"
+       alt="{{ $alt }}"
+       loading="lazy"
+       {{- with $width }} width="{{ . }}"{{- end -}}
+       {{- with .Get "height" }} height="{{ . }}"{{- end -}}>
+  {{- if or $caption $attr -}}
+    <figcaption>
+      {{- with $caption }}{{ . | $.Page.RenderString }}{{ end -}}
+      {{- with $attr -}}
+        <span class="figure__attr">
+          {{- if $attrlink }}<a href="{{ $attrlink }}" rel="noopener">{{ . }}</a>{{ else }}{{ . }}{{ end -}}
+        </span>
+      {{- end -}}
+    </figcaption>
+  {{- end -}}
+</figure>

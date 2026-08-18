@@ -1,0 +1,10 @@
+{{- /* toc.html —— 智能自动目录（方案二·智能自动目录）滚动实时高亮、折叠/展开 */ -}}
+{{- $toc := .TableOfContents -}}
+{{- if $toc -}}
+<aside class="toc" aria-label="{{ i18n "toc" }}" data-toc>
+  <div class="toc__header">
+    <h2 class="toc__title">{{ i18n "toc" }}</h2>
+  </div>
+  {{- replace $toc `<ul>` `<ol class="toc__list">` | replace `</ul>` `</ol>` | safeHTML -}}
+</aside>
+{{- end -}}

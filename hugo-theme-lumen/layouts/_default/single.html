@@ -1,0 +1,168 @@
+{{- /* single.html —— 文章详情页（方案三·文章详情页）分层：头部信息区 / 正文阅读区 / 底部交互区 */ -}}
+{{- define "main" -}}
+{{- $showToc := .Params.showToc | default (.Site.Params.showToc | default true) -}}
+{{- $showBreadcrumb := .Params.showBreadcrumb | default (.Site.Params.showBreadcrumb | default true) -}}
+{{- $showReadingTime := .Site.Params.showReadingTime | default true -}}
+{{- $showWordCount := .Site.Params.showWordCount | default true -}}
+{{- $showCopyCode := .Params.showCopyCode | default (.Site.Params.enableCopyCode | default true) -}}
+{{- $showPostNav := .Site.Params.showPostNavigation | default true -}}
+{{- $showRelated := .Site.Params.showRelatedPosts | default true -}}
+{{- $enableComments := .Params.comment | default (.Site.Params.enableComments | default false) -}}
+{{- $encrypted := .Params.password -}}
+
+{{- /* 面包屑（方案二·层级面包屑）首页 / 分类 / 文章 三级 */ -}}
+{{- if $showBreadcrumb -}}
+<nav class="breadcrumb" aria-label="{{ i18n "breadcrumb" }}">
+  <ol>
+    <li><a href="{{ .Site.BaseURL | relLangURL }}">{{ i18n "home" }}</a></li>
+    {{- with .Params.categories -}}
+      {{- range first 1 . -}}
+        <li><a href="{{ "/categories/" | relLangURL }}{{ . | urlize }}/">{{ . }}</a></li>
+      {{- end -}}
+    {{- end -}}
+    <li aria-current="page">{{ .Title }}</li>
+  </ol>
+</nav>
+{{- end -}}
+
+<div class="post-layout">
+
+  <article class="post" itemscope itemtype="https://schema.org/Article">
+    {{- /* 头部信息区：标题 / 发布时间 / 分类 / 标签 / 字数 / 阅读时长（方案三）*/ -}}
+    <header class="post__header">
+      <h1 class="post__title" itemprop="headline">{{ .Title }}</h1>
+
+      <div class="post__meta">
+        <time datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}" itemprop="datePublished">
+          {{ .Date.Format (.Site.Params.dateFmt | default "2006-01-02") }}
+        </time>
+
+        {{- with .Params.categories -}}
+          <span class="divider">·</span>
+          {{- range . -}}
+            <a href="{{ "/categories/" | relLangURL }}{{ . | urlize }}/" itemprop="about">{{ . }}</a>
+          {{- end -}}
+        {{- end -}}
+
+        {{- if and $showReadingTime .ReadingTime -}}
+          <span class="divider">·</span>
+          <span>{{ .ReadingTime }} {{ i18n "min_read" }}</span>
+        {{- end -}}
+
+        {{- if and $showWordCount .WordCount -}}
+          <span class="divider">·</span>
+          <span>{{ .WordCount }} {{ i18n "words" }}</span>
+        {{- end -}}
+
+        {{- if not .Date.IsZero -}}
+          {{- if and .Lastmod (not (.Lastmod.Equal .Date)) -}}
+            <span class="divider">·</span>
+            <span>{{ i18n "updated" }}{{ .Lastmod.Format (.Site.Params.dateFmt | default "2006-01-02") }}</span>
+          {{- end -}}
+        {{- end -}}
+      </div>
+
+      {{- with .Params.tags -}}
+        <div class="post-card__tags" style="margin-top: var(--space-3);">
+          {{- range . -}}
+            <a class="tag-chip" href="{{ "/tags/" | relLangURL }}{{ . | urlize }}/">#{{ . }}</a>
+          {{- end -}}
+        </div>
+      {{- end -}}
+    </header>
+
+    {{- /* 正文阅读区：720px 居中窄屏阅读（方案三）*/ -}}
+    {{- if $encrypted -}}
+      <form class="encrypt-form" data-cipher="{{ $encrypted | safeHTML }}">
+        <p>{{ i18n "encrypted_hint" | default "本文已加密，请输入密码访问。" }}</p>
+        <input type="password" name="password" placeholder="{{ i18n "password" | default "密码" }}" aria-label="{{ i18n "password" | default "密码" }}" autocomplete="current-password" required>
+        <button type="submit">{{ i18n "unlock" | default "解锁" }}</button>
+        <p class="encrypt-form__error" style="color: var(--error); margin-top: var(--space-2); min-height: 1em;"></p>
+      </form>
+      <div class="content content--encrypted" data-hidden></div>
+    {{- else -}}
+      <div class="content" itemprop="articleBody">
+        {{- .Content -}}
+      </div>
+    {{- end -}}
+
+    {{- /* 底部交互区：版权 / 上下篇 / 相关文章 / 评论（方案三）*/ -}}
+    <footer class="post__footer">
+      {{- with .Site.Params.copyright -}}
+        <div class="post__copyright">{{ . | safeHTML }}</div>
+      {{- else -}}
+        <div class="post__copyright">
+          {{- i18n "copyright_notice" | default "本文作者保留版权，转载请注明出处。" -}}
+        </div>
+      {{- end -}}
+
+      {{- if $showPostNav -}}
+        {{- $prev := .PrevInSection -}}
+        {{- $next := .NextInSection -}}
+        {{- if or $prev $next -}}
+          <nav class="post-nav" aria-label="{{ i18n "post_nav" }}">
+            {{- with $prev -}}
+              <a class="post-nav__card post-nav__card--prev" href="{{ .RelPermalink }}" rel="prev">
+                <div class="post-nav__label">← {{ i18n "prev_post" }}</div>
+                <div class="post-nav__title">{{ .Title }}</div>
+              </a>
+            {{- end -}}
+            {{- with $next -}}
+              <a class="post-nav__card post-nav__card--next" href="{{ .RelPermalink }}" rel="next">
+                <div class="post-nav__label">{{ i18n "next_post" }} →</div>
+                <div class="post-nav__title">{{ .Title }}</div>
+              </a>
+            {{- end -}}
+          </nav>
+        {{- end -}}
+      {{- end -}}
+
+      {{- if $showRelated -}}
+        {{- $related := .Site.RegularPages.Related . | first 4 -}}
+        {{- with $related -}}
+          <section class="related-posts">
+            <h2 class="related-posts__title">{{ i18n "related_posts" }}</h2>
+            <ul class="related-posts__list">
+              {{- range . -}}
+                <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+              {{- end -}}
+            </ul>
+          </section>
+        {{- end -}}
+      {{- end -}}
+
+      {{- /* 评论区：默认 Giscus，兼容 Waline / Disqus（方案二进阶功能·多端评论系统）*/ -}}
+      {{- if $enableComments -}}
+        <section class="comments" data-lazy-comments
+                 data-src="{{ "/js/giscus.min.js" | relURL }}">
+          <h2 class="related-posts__title">{{ i18n "comments" }}</h2>
+          {{- with .Site.Params.giscus -}}
+            {{- if and .repo .repoId -}}
+              <script src="https://giscus.app/client.js"
+                      data-repo="{{ .repo }}"
+                      data-repo-id="{{ .repoId }}"
+                      data-category="{{ .category }}"
+                      data-category-id="{{ .categoryId }}"
+                      data-mapping="{{ .mapping | default "pathname" }}"
+                      data-reactions-enabled="{{ .reactionsEnabled | default 1 }}"
+                      data-theme="preferred_color_scheme"
+                      data-emit-metadata="0"
+                      crossorigin="anonymous"
+                      async></script>
+            {{- else -}}
+              <p class="search-empty">{{ i18n "comments_disabled_hint" | default "评论功能未配置，请在站点配置中设置 giscus 参数。" }}</p>
+            {{- end -}}
+          {{- end -}}
+        </section>
+      {{- end -}}
+    </footer>
+  </article>
+
+  {{- /* 右侧 TOC（方案二·智能自动目录）*/ -}}
+  {{- if and $showToc .TableOfContents (not $encrypted) -}}
+    <div class="post-layout__toc">
+      {{- partial "toc.html" . -}}
+    </div>
+  {{- end -}}
+</div>
+{{- end -}}

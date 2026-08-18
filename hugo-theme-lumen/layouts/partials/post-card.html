@@ -1,0 +1,45 @@
+{{- /* post-card.html —— 文章卡片复用组件（方案四·partials）*/ -}}
+{{- $dateFmt := "2006-01-02" -}}
+{{- $showReadingTime := .Site.Params.showReadingTime | default true -}}
+{{- $showWordCount := .Site.Params.showWordCount | default true -}}
+{{- $cover := .Params.cover -}}
+{{- $summary := .Description | default (.Summary | plainify | truncate 160) -}}
+
+<article class="post-card{{ with $cover }} post-card--with-cover{{ end }}">
+  {{- with $cover -}}
+    <a href="{{ $.RelPermalink }}" class="post-card__media">
+      <img class="post-card__cover" src="{{ . | relURL }}" alt="{{ $.Title }}" loading="lazy">
+    </a>
+  {{- end -}}
+
+  <h3 class="post-card__title">
+    <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+  </h3>
+
+  <div class="post-card__meta">
+    <time datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">{{ .Date.Format $dateFmt }}</time>
+    {{- with .Params.categories -}}
+      {{- range . -}}
+        <a class="post-card__category" href="{{ "/categories/" | relLangURL }}{{ . | urlize }}/">{{ . }}</a>
+      {{- end -}}
+    {{- end -}}
+    {{- if and $showReadingTime .ReadingTime -}}
+      <span class="post-card__reading-time">{{ .ReadingTime }} {{ i18n "min_read" }}</span>
+    {{- end -}}
+    {{- if and $showWordCount .WordCount -}}
+      <span class="post-card__word-count">{{ .WordCount }} {{ i18n "words" }}</span>
+    {{- end -}}
+  </div>
+
+  {{- with $summary -}}
+    <p class="post-card__excerpt">{{- . | plainify -}}</p>
+  {{- end -}}
+
+  {{- with .Params.tags -}}
+    <div class="post-card__tags">
+      {{- range . -}}
+        <a class="tag-chip" href="{{ "/tags/" | relLangURL }}{{ . | urlize }}/">#{{ . }}</a>
+      {{- end -}}
+    </div>
+  {{- end -}}
+</article>

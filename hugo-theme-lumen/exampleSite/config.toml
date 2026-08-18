@@ -1,0 +1,159 @@
+# ===========================================================================
+# Lumen 主题示例站点配置（方案六·三级灵活配置体系）
+# 1. 主题默认配置：theme.toml 内置最优默认值
+# 2. 站点全局配置：本文件覆盖主题参数
+# 3. 单文独立配置：文章 Front Matter 单独控制
+# ===========================================================================
+
+baseURL = "https://example.com/"
+languageCode = "zh-CN"
+defaultContentLanguage = "zh-cn"
+title = "Lumen · 流明"
+theme = "hugo-theme-lumen"
+copyright = "© 2026 Lumen. 保留所有权利。"
+
+# —— 多语言定义（i18n/zh-CN.toml 与 en.toml 对应，方案四·i18n）——
+[languages]
+  [languages.zh-cn]
+    languageName = "简体中文"
+    weight = 1
+  [languages.en]
+    languageName = "English"
+    weight = 2
+
+# —— 内容优化（方案七·精细化中文阅读优化）——
+[markup]
+  [markup.highlight]
+    codeFences = true
+    guessSyntax = true                  # 自动识别 150+ 语言
+    lineNos = false                    # 行号开关（按需打开）
+    lineNumbersInTable = false
+    noClasses = true                   # 使用 inline class，配合 _code.css
+    style = "github"                   # 基础风格，CSS 内已自适配明暗
+    tabWidth = 4
+  [markup.goldmark]
+    [markup.goldmark.parser]
+      autoHeadingID = true
+      autoHeadingIDType = "github"
+    [markup.goldmark.renderer]
+      hardWraps = false
+      unsafe = true                    # 允许 raw HTML（短代码、视频嵌入）
+      xhtml = false
+  [markup.tableOfContents]
+    startLevel = 2
+    endLevel = 4
+    ordered = true                    # 配合 toc.html 的 <ol>
+
+# —— 多输出格式：HTML + RSS + JSON 索引（方案二·全文检索）——
+# 注：Hugo 默认自动生成 /sitemap.xml 与 RSS，无需重复声明
+[outputs]
+  home = ["HTML", "RSS", "JSON"]
+  section = ["HTML", "RSS"]
+  taxonomy = ["HTML", "RSS"]
+  term = ["HTML", "RSS"]
+
+[outputFormats]
+  [outputFormats.JSON]
+    mediaType = "application/json"
+    baseName = "index"                # 输出 /index.json
+    isPlainText = true
+
+# —— 主导航（方案二·层级面包屑/方案三）——
+[menu]
+  [[menu.main]]
+    name = "首页"
+    url = "/"
+    weight = 1
+  [[menu.main]]
+    name = "文章"
+    url = "/posts/"
+    weight = 2
+  [[menu.main]]
+    name = "分类"
+    url = "/categories/"
+    weight = 3
+  [[menu.main]]
+    name = "标签"
+    url = "/tags/"
+    weight = 4
+  [[menu.main]]
+    name = "归档"
+    url = "/archives/"
+    weight = 5
+  [[menu.main]]
+    name = "友链"
+    url = "/friends/"
+    weight = 6
+  [[menu.main]]
+    name = "关于"
+    url = "/about/"
+    weight = 7
+  [[menu.footer]]
+    name = "RSS"
+    url = "/index.xml"
+    weight = 1
+
+[params]
+  # —— 站点元数据 ——
+  description = "Lumen（流明）—— 面向技术写作者的极简高性能 Hugo 博客主题示例站。"
+  author = "Lumen"
+  keywords = ["Hugo", "Lumen", "博客", "极简", "技术写作"]
+
+  # —— 外观设置（方案六核心全局配置示例）——
+  defaultTheme = "auto"                # auto / light / dark
+  showToc = true
+  showReadingTime = true
+  showWordCount = true
+  showBreadcrumb = true
+  showPostNavigation = true
+  showRelatedPosts = true
+  dateFmt = "2006-01-02"
+
+  # —— 首页布局：list（默认经典列表）/ magazine（杂志卡片，方案三）——
+  homeLayout = "list"
+  pageSize = 10
+  homeHero = true
+  homeTitle = "Lumen"
+  homeSubtitle = "现代极简、高性能、开箱即用 · 为技术写作者而生"
+
+  # —— 功能开关（方案二·可选进阶功能）——
+  enableSearch = true
+  enableComments = true                 # 演示用，部署前请填写自己的 giscus 仓库
+  enablePWA = false
+  enableAnnouncement = false
+  enableCopyCode = true
+  enableReadingProgress = true
+  cjkOptimize = true
+
+  # —— 资源路径 ——
+  favicon = "/favicon.ico"
+  defaultImage = "/images/default-og.png"
+
+  # —— 社交链接（partial/footer.html 渲染）——
+  [[params.social]]
+    name = "GitHub"
+    url = "https://github.com/yourname"
+  [[params.social]]
+    name = "Email"
+    url = "mailto:hi@example.com"
+  [[params.social]]
+    name = "RSS"
+    url = "/index.xml"
+
+  # —— 全站公告（方案二进阶·全站公告模块）——
+  [params.announcement]
+    id = "2026-01-launch"
+    text = "🎉 Lumen v1.0 已发布，欢迎使用！"
+
+  # —— Giscus 评论（方案二进阶·多端评论系统，启用前需填入仓库信息）——
+  [params.giscus]
+    repo = ""
+    repoId = ""
+    category = "Announcements"
+    categoryId = ""
+    mapping = "pathname"
+    reactionsEnabled = 1
+
+  # —— 自定义 CSS / JS 注入点（按需开启）——
+  # customCSS = ["css/custom.css"]
+  # customJS = ["js/custom.js"]

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>排版 on Lumen · 流明</title><link>http://localhost/tags/%E6%8E%92%E7%89%88/</link><description>Recent content in 排版 on Lumen · 流明</description><generator>Hugo</generator><language>zh-cn</language><copyright>© 2026 Lumen. 保留所有权利。</copyright><lastBuildDate>Sun, 15 Feb 2026 10:30:00 +0800</lastBuildDate><atom:link href="http://localhost/tags/%E6%8E%92%E7%89%88/index.xml" rel="self" type="application/rss+xml"/><item><title>Markdown 基础元素演示</title><link>http://localhost/posts/markdown-features/</link><pubDate>Sun, 15 Feb 2026 10:30:00 +0800</pubDate><guid>http://localhost/posts/markdown-features/</guid><description>&lt;p>本页用于核对 Markdown 元素渲染细节。&lt;/p>
+&lt;h2 id="文本样式">文本样式&lt;/h2>
+&lt;p>正文段落；&lt;strong>加粗&lt;/strong>；&lt;em>斜体&lt;/em>；&lt;del>删除线&lt;/del>；&lt;code>行内代码&lt;/code>；&lt;a href="https://gohugo.io">超链接&lt;/a>。&lt;/p>
+&lt;h2 id="列表">列表&lt;/h2>
+&lt;ul>
+&lt;li>无序项 A&lt;/li>
+&lt;li>无序项 B
+&lt;ul>
+&lt;li>嵌套项 B1&lt;/li>
+&lt;li>嵌套项 B2&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>无序项 C&lt;/li>
+&lt;/ul>
+&lt;ol>
+&lt;li>有序项 1&lt;/li>
+&lt;li>有序项 2&lt;/li>
+&lt;li>有序项 3&lt;/li>
+&lt;/ol>
+&lt;h2 id="引用">引用&lt;/h2>
+&lt;blockquote>
+&lt;p>名言第一句。&lt;/p>
+&lt;p>名言第二句。&lt;/p>
+&lt;/blockquote>
+&lt;h2 id="表格">表格&lt;/h2>
+&lt;table>
+ &lt;thead>
+ &lt;tr>
+ &lt;th>字段&lt;/th>
+ &lt;th>类型&lt;/th>
+ &lt;th>说明&lt;/th>
+ &lt;/tr>
+ &lt;/thead>
+ &lt;tbody>
+ &lt;tr>
+ &lt;td>&lt;code>id&lt;/code>&lt;/td>
+ &lt;td>int&lt;/td>
+ &lt;td>主键&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>&lt;code>name&lt;/code>&lt;/td>
+ &lt;td>string&lt;/td>
+ &lt;td>名称&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>&lt;code>created_at&lt;/code>&lt;/td>
+ &lt;td>datetime&lt;/td>
+ &lt;td>创建时间&lt;/td>
+ &lt;/tr>
+ &lt;/tbody>
+&lt;/table>
+&lt;h2 id="代码块带行号语义">代码块（带行号语义）&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">def&lt;/span> &lt;span style="color:#900;font-weight:bold">fib&lt;/span>(n: &lt;span style="color:#0086b3">int&lt;/span>) &lt;span style="color:#000;font-weight:bold">-&amp;gt;&lt;/span> &lt;span style="color:#0086b3">int&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#d14">&amp;#34;&amp;#34;&amp;#34;计算斐波那契数。&amp;#34;&amp;#34;&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> a, b &lt;span style="color:#000;font-weight:bold">=&lt;/span> &lt;span style="color:#099">0&lt;/span>, &lt;span style="color:#099">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">for&lt;/span> _ &lt;span style="color:#000;font-weight:bold">in&lt;/span> &lt;span style="color:#0086b3">range&lt;/span>(n):
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> a, b &lt;span style="color:#000;font-weight:bold">=&lt;/span> b, a &lt;span style="color:#000;font-weight:bold">+&lt;/span> b
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">return&lt;/span> a
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="分隔线">分隔线&lt;/h2>
+&lt;hr>
+&lt;h2 id="任务清单">任务清单&lt;/h2>
+&lt;ul>
+&lt;li>&lt;input checked="" disabled="" type="checkbox"> 已完成项&lt;/li>
+&lt;li>&lt;input disabled="" type="checkbox"> 未完成项&lt;/li>
+&lt;li>&lt;input disabled="" type="checkbox"> 另一项&lt;/li>
+&lt;/ul>
+&lt;h2 id="数学与脚注">数学与脚注&lt;/h2>
+&lt;p>文章支持外接 KaTeX/MathJax，这里仅演示普通段落。&lt;/p>
+&lt;p>正文可附脚注&lt;sup id="fnref:1">&lt;a href="#fn:1" class="footnote-ref" role="doc-noteref">1&lt;/a>&lt;/sup>。&lt;/p>
+&lt;p>正文末尾。&lt;/p>
+&lt;div class="footnotes" role="doc-endnotes">
+&lt;hr>
+&lt;ol>
+&lt;li id="fn:1">
+&lt;p>脚注内容。&amp;#160;&lt;a href="#fnref:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;/div></description></item></channel></rss>

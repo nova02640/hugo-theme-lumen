@@ -1,0 +1,77 @@
+{{- /* list.html —— 通用列表页（方案三·聚合列表页 / 归档页）*/ -}}
+{{- define "main" -}}
+{{- $showBreadcrumb := .Site.Params.showBreadcrumb | default true -}}
+{{- $pageSize := .Site.Params.pageSize | default 10 -}}
+
+{{- if $showBreadcrumb -}}
+<nav class="breadcrumb" aria-label="{{ i18n "breadcrumb" }}">
+  <ol>
+    <li><a href="{{ .Site.BaseURL | relLangURL }}">{{ i18n "home" }}</a></li>
+    <li aria-current="page">{{ .Title }}</li>
+  </ol>
+</nav>
+{{- end -}}
+
+<header class="list-header">
+  <h1 class="list-header__title">{{ .Title }}</h1>
+  {{- with .Description -}}<p class="list-header__desc">{{ . }}</p>{{- end -}}
+</header>
+
+{{- if eq .Type "tags" -}}
+  {{- /* 单标签页：此标签下所有文章列表（标签云在 terms.html）*/ -}}
+  {{- with .Pages -}}
+    <ul class="post-list">
+      {{- range . -}}
+        <li class="post-list__item">{{- partial "post-card.html" . -}}</li>
+      {{- end -}}
+    </ul>
+  {{- end -}}
+{{- else if eq .Type "categories" -}}
+  {{- /* 分类页：分类简介 + 文章列表（方案三·分类页）*/ -}}
+  {{- with .Pages -}}
+    <ul class="post-list">
+      {{- range . -}}
+        <li class="post-list__item">{{- partial "post-card.html" . -}}</li>
+      {{- end -}}
+    </ul>
+  {{- end -}}
+{{- else -}}
+  {{- /* 归档页：按年/月时间轴分组（方案三·归档页）*/ -}}
+  {{- $pages := .Pages -}}
+  {{- if $pages -}}
+    {{- $year := "" -}}
+    <ul class="post-list" style="list-style: none;">
+      {{- range $pages -}}
+        {{- $y := .Date.Format "2006" -}}
+        {{- if ne $y $year -}}
+          {{- $year = $y -}}
+          </ul>
+          <h2 class="archive-year">{{ $y }}</h2>
+          <ul class="post-list" style="list-style: none;">
+        {{- end -}}
+        <li class="archive-item">
+          <time datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">{{ .Date.Format "01-02" }}</time>
+          <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+        </li>
+      {{- end -}}
+      </ul>
+  {{- end -}}
+{{- end -}}
+
+{{- /* 分页 */ -}}
+{{- if gt .Paginator.TotalPages 1 -}}
+<nav class="pagination" aria-label="{{ i18n "pagination" }}">
+  {{- if .Paginator.HasPrev -}}
+    <a href="{{ .Paginator.Prev.RelPermalink }}">← {{ i18n "prev" }}</a>
+  {{- else -}}
+    <span class="is-disabled">← {{ i18n "prev" }}</span>
+  {{- end -}}
+  <span>{{ .Paginator.PageNumber }} / {{ .Paginator.TotalPages }}</span>
+  {{- if .Paginator.HasNext -}}
+    <a href="{{ .Paginator.Next.RelPermalink }}">{{ i18n "next" }} →</a>
+  {{- else -}}
+    <span class="is-disabled">{{ i18n "next" }} →</span>
+  {{- end -}}
+</nav>
+{{- end -}}
+{{- end -}}

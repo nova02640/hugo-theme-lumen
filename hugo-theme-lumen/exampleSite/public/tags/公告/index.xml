@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>公告 on Lumen · 流明</title><link>http://localhost/tags/%E5%85%AC%E5%91%8A/</link><description>Recent content in 公告 on Lumen · 流明</description><generator>Hugo</generator><language>zh-cn</language><copyright>© 2026 Lumen. 保留所有权利。</copyright><lastBuildDate>Thu, 01 Jan 2026 09:00:00 +0800</lastBuildDate><atom:link href="http://localhost/tags/%E5%85%AC%E5%91%8A/index.xml" rel="self" type="application/rss+xml"/><item><title>欢迎来到 Lumen 主题示例站</title><link>http://localhost/posts/welcome-to-lumen/</link><pubDate>Thu, 01 Jan 2026 09:00:00 +0800</pubDate><guid>http://localhost/posts/welcome-to-lumen/</guid><description>&lt;blockquote>
+&lt;p>&lt;strong>Lumen（流明）&lt;/strong> 是面向技术写作者的极简、高性能、开箱即用 Hugo 博客主题。本站即为示例站点。&lt;/p>
+&lt;/blockquote>
+&lt;p>本文档演示 Lumen 主题的常用功能，方便你快速上手。所有功能均按方案设计实现，无需额外构建链。&lt;/p>
+&lt;h2 id="一视觉与排版">一、视觉与排版&lt;/h2>
+&lt;p>正文以 720px 居中窄屏呈现，行高 1.7，配合 8px 基线网格、单层柔和阴影、统一 8-12px 圆角，兼顾简约质感与专业调性。中英文混排间距经专属优化，避免拥挤。&lt;/p>
+&lt;p>字体使用系统原生字体栈，无外部字体请求，彻底消除 FOIT / FOUT 文字闪烁。&lt;/p>
+&lt;h2 id="二智能自动目录">二、智能自动目录&lt;/h2>
+&lt;p>右侧侧栏自动同步本文层级（方案二·智能自动目录）：&lt;/p>
+&lt;ul>
+&lt;li>滚动实时高亮当前章节&lt;/li>
+&lt;li>支持折叠 / 展开&lt;/li>
+&lt;li>移动端以悬浮入口呈现&lt;/li>
+&lt;/ul>
+&lt;h2 id="三高级代码高亮">三、高级代码高亮&lt;/h2>
+&lt;p>基于 Hugo Chroma 原生高亮，支持 150+ 编程语言、行号开关与一键复制：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">package&lt;/span> main
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">import&lt;/span> &lt;span style="color:#d14">&amp;#34;fmt&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">func&lt;/span> &lt;span style="color:#900;font-weight:bold">main&lt;/span>() {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> fmt.&lt;span style="color:#900;font-weight:bold">Println&lt;/span>(&lt;span style="color:#d14">&amp;#34;Hello, Lumen!&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>hugo server -D --bind&lt;span style="color:#000;font-weight:bold">=&lt;/span>0.0.0.0
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>代码块右上角的「复制」按钮（方案二·高级代码高亮）由 &lt;code>main.js&lt;/code> 渐进增强，无 JS 环境下仍可正常浏览。&lt;/p>
+&lt;h2 id="四提示框短代码">四、提示框短代码&lt;/h2>
+&lt;div class="note note--info" role="note">
+ &lt;div class="note__title">ℹ️ 提示&lt;/div>
+ &lt;div class="note__content">使用 &lt;code>note&lt;/code> 短代码即可生成此提示框，支持 info / warning / error / success 四种语义。&lt;/div>
+&lt;/div>
+
+&lt;div class="note note--warning" role="note">
+ &lt;div class="note__title">⚠️ 注意&lt;/div>
+ &lt;div class="note__content">深色模式下提示框颜色自动切换，无需任何配置。&lt;/div>
+&lt;/div>
+
+&lt;div class="note note--success" role="note">
+ &lt;div class="note__title">✓ 成功&lt;/div>
+ &lt;div class="note__content">开箱即用，零依赖构建。&lt;/div>
+&lt;/div>
+
+&lt;h2 id="五图片注释短代码">五、图片注释短代码&lt;/h2>
+&lt;figure class="figure">
+ &lt;img src="http://localhost/images/welcome-cover.svg"
+ alt="Lumen 主题封面"
+ loading="lazy">&lt;figcaption>Lumen 主题封面示意（SVG 占位图）&lt;/figcaption>&lt;/figure>
+
+&lt;h2 id="六明暗双主题">六、明暗双主题&lt;/h2>
+&lt;p>顶部右侧主题切换按钮支持三态循环（方案二·明暗双主题）：&lt;/p></description></item></channel></rss>

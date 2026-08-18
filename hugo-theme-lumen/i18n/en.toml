@@ -1,0 +1,102 @@
+# English (方案四·i18n)
+[primary_nav]
+other = "Primary"
+
+[footer_nav]
+other = "Footer"
+
+[search]
+other = "Search"
+
+[search_placeholder]
+other = "Search posts… (press /)"
+
+[toggle_theme]
+other = "Toggle theme"
+
+[menu]
+other = "Menu"
+
+[skip_to_content]
+other = "Skip to content"
+
+[home]
+other = "Home"
+
+[breadcrumb]
+other = "Breadcrumb"
+
+[min_read]
+other = "min read"
+
+[words]
+other = "words"
+
+[updated]
+other = "Updated "
+
+[toc]
+other = "On this page"
+
+[prev_post]
+other = "Previous"
+
+[next_post]
+other = "Next"
+
+[post_nav]
+other = "Post navigation"
+
+[related_posts]
+other = "Related posts"
+
+[prev]
+other = "Prev"
+
+[next]
+other = "Next"
+
+[pagination]
+other = "Pagination"
+
+[comments]
+other = "Comments"
+
+[comments_disabled_hint]
+other = "Comments are not configured. Set giscus params in site config."
+
+[announcement]
+other = "Announcement"
+
+[close]
+other = "Close"
+
+[more_posts]
+other = "All posts"
+
+[password]
+other = "Password"
+
+[unlock]
+other = "Unlock"
+
+[encrypted_hint]
+other = "This post is encrypted. Please enter the password to view it."
+
+[copyright_notice]
+other = "All rights reserved. Please cite the original source when reposting."
+
+[powered_rss]
+other = "RSS feed"
+
+[note_info]
+other = "Info"
+
+[note_warning]
+other = "Warning"
+
+[note_error]
+other = "Error"
+
+[note_success]
+other = "Success"

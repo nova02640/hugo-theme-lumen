@@ -1,0 +1,167 @@
+/* ==========================================================================
+   _variables.css —— 主题配色 / 间距 / 字体变量（方案一·视觉设计规范）
+   8px 基线网格；圆角 8-12px；单层柔和阴影；双模式自适应配色
+   ========================================================================== */
+
+:root {
+  /* —— 浅色模式：米白底 + 深灰字 —— */
+  --bg: #faf9f6;                  /* 米白底，规避纯白刺眼 */
+  --bg-subtle: #f2f0ea;           /* 卡片次级背景 */
+  --bg-elevated: #ffffff;         /* 卡片 / 悬浮面板 */
+  --bg-code: #f6f4ee;
+
+  --fg: #2c2c2c;                  /* 深灰字 */
+  --fg-secondary: #5a5a5a;        /* 副文本 */
+  --fg-muted: #8a8a8a;            /* 弱化文本 */
+  --fg-on-primary: #ffffff;
+
+  --border: #e6e3da;             /* 分隔线 / 边框 */
+  --border-strong: #d8d4c7;
+
+  --primary: #2563eb;             /* 主色：温润蓝 */
+  --primary-hover: #1d4ed8;
+  --primary-soft: #e0e7ff;
+
+  --accent: #d97706;              /* 强调色：暖橙 */
+
+  --link: var(--primary);
+  --link-hover: var(--primary-hover);
+
+  /* —— 语义色 —— */
+  --success: #16a34a;
+  --warning: #d97706;
+  --error: #dc2626;
+  --info: #0ea5e9;
+
+  --note-bg: #fff7ed;
+  --note-border: #fdba74;
+
+  /* —— 圆角规范：8-12px —— */
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-full: 9999px;
+
+  /* —— 8px 基线网格 —— */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+
+  /* —— 字体体系（方案一·视觉设计规范）—— */
+  --font-sans: "Inter", "San Francisco",
+    -apple-system, BlinkMacSystemFont, "Segoe UI",
+    "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei",
+    "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-mono: "SF Mono", "JetBrains Mono", "Fira Code",
+    "Cascadia Code", Menlo, Consolas, "Liberation Mono",
+    "Courier New", monospace;
+  --font-serif: "Georgia", "Source Han Serif SC", "Noto Serif SC", serif;
+
+  /* —— 排版规范：正文行高 1.7，最大行宽 720px —— */
+  --leading: 1.7;
+  --leading-tight: 1.25;
+  --content-max: 720px;
+  --layout-max: 1200px;
+
+  /* —— 单层柔和阴影 —— */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.08);
+
+  /* —— 响应式断点（方案二·全响应式布局）—— */
+  --bp-sm: 640px;   /* 移动端 */
+  --bp-md: 768px;   /* 平板 */
+  --bp-lg: 1024px;  /* 桌面 */
+
+  /* —— z-index 层级 —— */
+  --z-header: 100;
+  --z-toc: 50;
+  --z-search: 200;
+  --z-overlay: 300;
+
+  /* —— 顶部阅读进度条（方案二·阅读进度条）—— */
+  --progress-height: 2px;
+}
+
+/* —— 深色模式：深灰底 + 浅白字 —— */
+:root[data-theme="dark"] {
+  --bg: #1a1a1a;
+  --bg-subtle: #222;
+  --bg-elevated: #262626;
+  --bg-code: #1f1f1f;
+
+  --fg: #e8e8e3;
+  --fg-secondary: #b8b8b0;
+  --fg-muted: #888;
+  --fg-on-primary: #ffffff;
+
+  --border: #333;
+  --border-strong: #444;
+
+  --primary: #60a5fa;
+  --primary-hover: #93c5fd;
+  --primary-soft: #1e3a8a;
+
+  --accent: #fbbf24;
+
+  --link: var(--primary);
+  --link-hover: var(--primary-hover);
+
+  --success: #4ade80;
+  --warning: #fbbf24;
+  --error: #f87171;
+  --info: #38bdf8;
+
+  --note-bg: #422006;
+  --note-border: #7c2d12;
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.5);
+}
+
+/* —— 跟随系统（auto 模式由 theme.js 套用，备用兜底）—— */
+@media (prefers-color-scheme: dark) {
+  :root[data-theme="auto"] {
+    --bg: #1a1a1a;
+    --bg-subtle: #222;
+    --bg-elevated: #262626;
+    --bg-code: #1f1f1f;
+    --fg: #e8e8e3;
+    --fg-secondary: #b8b8b0;
+    --fg-muted: #888;
+    --fg-on-primary: #ffffff;
+    --border: #333;
+    --border-strong: #444;
+    --primary: #60a5fa;
+    --primary-hover: #93c5fd;
+    --primary-soft: #1e3a8a;
+    --accent: #fbbf24;
+    --link: var(--primary);
+    --link-hover: var(--primary-hover);
+    --success: #4ade80;
+    --warning: #fbbf24;
+    --error: #f87171;
+    --info: #38bdf8;
+    --note-bg: #422006;
+    --note-border: #7c2d12;
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
+    --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.5);
+  }
+}
+
+/* —— 尊重用户系统级无障碍偏好 —— */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

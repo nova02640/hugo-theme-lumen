@@ -1,0 +1,112 @@
+{{- /* baseof.html —— 全站基础骨架（方案四·技术架构）
+   * 内联防闪烁主题脚本（方案二·明暗双主题：页面刷新无闪烁）
+   * Hugo Pipes 压缩 CSS（方案五·资源压缩优化）
+   * 关键 CSS 内联渲染，非核心 JS 全部 defer 异步加载
+   * 内嵌 SVG 图标集（方案四·图标方案：内嵌 SVG，零字体依赖）
+   */ -}}
+<!DOCTYPE html>
+<html lang="{{ .Site.Language.Lang | default "zh-CN" }}" data-theme="auto">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <meta name="generator" content="Hugo {{ hugo.Version }}">
+
+  {{- /* 防闪烁主题前置脚本：在 CSS 加载前同步设置 data-theme，避免亮->暗跳变 */ -}}
+  <script>
+    (function () {
+      try {
+        var k = "lumen-theme", r = "lumen-resolved";
+        var v = localStorage.getItem(k) || "{{ .Site.Params.defaultTheme | default "auto" }}";
+        var resolved = v === "light" || v === "dark" ? v
+          : (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+        document.documentElement.setAttribute("data-theme", v);
+        document.documentElement.setAttribute("data-resolved", resolved);
+        localStorage.setItem(r, resolved);
+      } catch (e) {}
+    })();
+  </script>
+
+  {{- /* favicon & manifest（方案二·PWA 全站适配，可选）*/ -}}
+  {{- with .Site.Params.favicon }}<link rel="icon" href="{{ . | relURL }}">{{ end -}}
+  {{- if .Site.Params.enablePWA -}}
+    <link rel="manifest" href="{{ "/manifest.json" | relURL }}">
+    <meta name="theme-color" content="#2563eb">
+  {{- end -}}
+
+  {{- /* SEO 全套标签（OG / Twitter / 结构化数据，partials/seo.html）*/ -}}
+  {{- partial "seo.html" . -}}
+
+  {{- /* Hugo Pipes：合并 _variables + main + _code → minify + fingerprint（方案五·资源压缩）*/ -}}
+  {{- $cssVars := resources.Get "css/_variables.css" -}}
+  {{- $cssMain := resources.Get "css/main.css" -}}
+  {{- $cssCode := resources.Get "css/_code.css" -}}
+  {{- $css := slice $cssVars $cssMain $cssCode | resources.Concat "css/lumen.css" -}}
+  {{- $css = $css | minify | fingerprint -}}
+  <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="{{ $css.RelPermalink }}"></noscript>
+
+  {{- /* Hugo Pipes：JS 全部 defer（方案五·非核心 JS 全部 defer 异步加载）*/ -}}
+  {{- $jsTheme := resources.Get "js/theme.js" -}}
+  {{- $jsMain  := resources.Get "js/main.js" -}}
+  {{- $jsSearch := resources.Get "js/search.js" -}}
+  {{- $js := slice $jsTheme $jsMain $jsSearch | resources.Concat "js/lumen.js" -}}
+  {{- $js = $js | minify | fingerprint -}}
+  <script src="{{ $js.RelPermalink }}" defer integrity="{{ $js.Data.Integrity }}"></script>
+</head>
+
+<body>
+  <a class="skip-link" href="#main">{{ i18n "skip_to_content" }}</a>
+
+  {{- if .Site.Params.enableAnnouncement -}}
+    {{- with .Site.Params.announcement -}}
+      <div class="announcement" data-id="{{ .id | default "default" }}" role="region" aria-label="{{ i18n "announcement" }}">
+        <span>{{ .text | safeHTML }}</span>
+        <button class="announcement__close" aria-label="{{ i18n "close" }}">×</button>
+      </div>
+    {{- end -}}
+  {{- end -}}
+
+  {{- /* 阅读进度条（方案二·阅读进度条）*/ -}}
+  {{- if .Site.Params.enableReadingProgress | default true -}}
+    <div class="reading-progress" aria-hidden="true"></div>
+  {{- end -}}
+
+  {{- partial "header.html" . -}}
+
+  <main id="main" class="l-main">
+    <div class="l-container">
+      {{- block "main" . -}}{{- end -}}
+    </div>
+  </main>
+
+  {{- partial "footer.html" . -}}
+
+  {{- /* 全文检索浮层（方案二·全文检索功能）*/ -}}
+  {{- if .Site.Params.enableSearch | default true -}}
+    <div class="search-overlay" role="dialog" aria-modal="true" aria-label="{{ i18n "search" }}">
+      <div class="search-panel">
+        <div class="search-input">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <circle cx="11" cy="11" r="7"/>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+          </svg>
+          <input type="search" placeholder="{{ i18n "search_placeholder" }}" aria-label="{{ i18n "search" }}">
+          <kbd>Esc</kbd>
+          <button class="icon-btn search-overlay__close" aria-label="{{ i18n "close" }}">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </button>
+        </div>
+        <div class="search-results" role="listbox"></div>
+      </div>
+    </div>
+  {{- end -}}
+
+  {{- /* 移动端 TOC 悬浮入口（方案二·移动端悬浮入口）*/ -}}
+  {{- if and (.Site.Params.showToc | default true) .TableOfContents -}}
+    <button class="toc-fab" aria-label="{{ i18n "toc" }}">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+    </button>
+  {{- end -}}
+</body>
+</html>

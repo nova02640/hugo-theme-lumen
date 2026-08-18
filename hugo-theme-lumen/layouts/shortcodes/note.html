@@ -1,0 +1,11 @@
+{{- /* shortcodes/note.html —— 提示框组件（方案四·自定义短代码·note）
+   * 用法：{{< note type="info|warning|error|success" title="可选标题" >}}内容{{< /note >}}
+   */ -}}
+{{- $type := .Get "type" | default "info" -}}
+{{- $title := .Get "title" -}}
+{{- $iconMap := dict "info" "ℹ️" "warning" "⚠️" "error" "✕" "success" "✓" -}}
+{{- $icon := index $iconMap $type | default "ℹ️" -}}
+<div class="note note--{{ $type }}" role="{{ if eq $type "error" }}alert{{ else }}note{{ end }}">
+  <div class="note__title">{{ $icon }} {{ with $title }}{{ . }}{{ else }}{{ T (printf "note_%s" $type) | default (title $type) }}{{ end }}</div>
+  <div class="note__content">{{ .Inner | .Page.RenderString }}</div>
+</div>

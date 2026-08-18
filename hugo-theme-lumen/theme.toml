@@ -1,0 +1,53 @@
+# theme.toml configuration for the Lumen Hugo theme.
+# 内置最优默认值，开箱即用无需修改（参考方案六第 1 条）
+
+name = "Lumen"
+license = "MIT"
+licenselink = "https://opensource.org/license/mit"
+description = "Lumen（流明）—— 面向技术写作者的现代极简、高性能、开箱即用 Hugo 博客主题"
+homepage = "https://github.com/gohugoio/hugoThemes"
+tags = ["blog", "minimal", "responsive", "dark-mode", "seo", "technical"]
+features = ["responsive", "dark-mode", "search", "toc", "rss", "i18n", "code-highlight"]
+min_version = "0.112.0"
+
+# 主题作者信息
+[author]
+  name = "Lumen"
+
+# 主题默认参数（站点级 config.toml 可覆盖；参考方案六第 1 条）
+[params]
+  # 外观设置（方案六核心全局配置示例）
+  defaultTheme = "auto"      # auto / light / dark
+  showToc = true
+  showReadingTime = true
+  showBreadcrumb = true
+  showWordCount = true
+  showPostNavigation = true
+  showRelatedPosts = true
+
+  # 首页布局：list（经典列表，默认） / magazine（杂志卡片，参考方案三）
+  homeLayout = "list"
+  pageSize = 10
+
+  # 功能开关
+  enableSearch = true
+  enableComments = false
+  enablePWA = false
+  enableAnnouncement = false
+  enableCopyCode = true
+  enableReadingProgress = true
+
+  # 中文阅读优化（方案七第 1 条）
+  cjkOptimize = true
+
+  # 社交链接
+  social = []
+
+  # Giscus 评论配置（方案二进阶功能：多端评论系统）
+  [params.giscus]
+    repo = ""
+    repoId = ""
+    category = ""
+    categoryId = ""
+    mapping = "pathname"
+    reactionsEnabled = 1

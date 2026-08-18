@@ -1,0 +1,27 @@
+{{- /* terms.html —— 分类 / 标签聚合页（方案三·聚合列表页）*/ -}}
+{{- define "main" -}}
+{{- $showBreadcrumb := .Site.Params.showBreadcrumb | default true -}}
+
+{{- if $showBreadcrumb -}}
+<nav class="breadcrumb" aria-label="{{ i18n "breadcrumb" }}">
+  <ol>
+    <li><a href="{{ .Site.BaseURL | relLangURL }}">{{ i18n "home" }}</a></li>
+    <li aria-current="page">{{ .Title }}</li>
+  </ol>
+</nav>
+{{- end -}}
+
+<header class="list-header">
+  <h1 class="list-header__title">{{ .Title }}</h1>
+  {{- with .Description -}}<p class="list-header__desc">{{ . }}</p>{{- end -}}
+</header>
+
+{{- /* 标签云 / 分类卡片，按词频自动缩放权重（方案三·标签页）*/ -}}
+<div class="tag-cloud">
+  {{- range .Data.Terms -}}
+    {{- $count := .Pages | len -}}
+    {{- $size := cond (gt $count 5) 1.4 (cond (gt $count 1) 1.05 0.9) -}}
+    <a href="{{ .Page.RelPermalink }}" style="font-size: {{ printf "%.2frem" $size }}">{{ .Page.Title }} <span style="color: var(--fg-muted); font-size: 0.75rem;">({{ $count }})</span></a>
+  {{- end -}}
+</div>
+{{- end -}}

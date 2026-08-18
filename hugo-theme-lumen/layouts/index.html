@@ -1,0 +1,60 @@
+{{- /* index.html —— 首页模板（方案三·首页双布局可选）
+   * 默认：经典列表布局
+   * 可选：杂志卡片布局（首篇大图置顶 + 网格卡片）
+   */ -}}
+{{- define "main" -}}
+{{- $layout := .Site.Params.homeLayout | default "list" -}}
+{{- $pages := where .Site.RegularPages "Section" "in" (.Site.Params.mainSections | default (slice "posts")) -}}
+{{- $hero := .Site.Params.homeHero | default false -}}
+
+{{- /* hero 区 */ -}}
+{{- if $hero -}}
+<section class="home-hero">
+  <h1 class="home-hero__title">{{ .Site.Params.homeTitle | default .Site.Title }}</h1>
+  <p class="home-hero__subtitle">{{ .Site.Params.homeSubtitle | default .Site.Params.description | default "" | safeHTML }}</p>
+</section>
+{{- end -}}
+
+{{- if eq $layout "magazine" -}}
+  {{- /* 杂志卡片布局（方案三·首页可选布局）首篇大图置顶 + 网格卡片 */ -}}
+  {{- with first 1 $pages -}}
+    {{- range . -}}
+      <article class="magazine-hero">
+        {{- with .Params.cover -}}
+          <a class="magazine-hero__media" href="{{ .RelPermalink }}">
+            <img src="{{ . | relURL }}" alt="{{ $.Title }}" loading="eager">
+          </a>
+        {{- end -}}
+        <div>
+          <h2 class="post-card__title" style="font-size: 1.75rem;"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+          <p class="post-card__excerpt">{{ .Description | default (.Summary | plainify | truncate 160) }}</p>
+          <div class="post-card__meta">
+            <time datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">{{ .Date.Format "2006-01-02" }}</time>
+          </div>
+        </div>
+      </article>
+    {{- end -}}
+  {{- end -}}
+
+  <div class="magazine-grid">
+    {{- range first 7 (after 1 $pages) -}}
+      <article class="post-list__item">{{- partial "post-card.html" . -}}</article>
+    {{- end -}}
+  </div>
+{{- else -}}
+  {{- /* 经典列表布局（默认）：时间倒序展示文章（方案三）*/ -}}
+  <ul class="post-list">
+    {{- range $pages -}}
+      <li class="post-list__item">{{- partial "post-card.html" . -}}</li>
+    {{- end -}}
+  </ul>
+{{- end -}}
+
+{{- if eq $layout "magazine" -}}
+  {{- /* 杂志布局下保留更多入口的分页 */ -}}
+  {{- $more := after 7 $pages -}}
+  {{- if $more -}}
+    <p style="text-align: center; margin-top: var(--space-6);"><a href="{{ "/posts/" | relLangURL }}">{{ i18n "more_posts" | default "查看全部文章" }} →</a></p>
+  {{- end -}}
+{{- end -}}
+{{- end -}}

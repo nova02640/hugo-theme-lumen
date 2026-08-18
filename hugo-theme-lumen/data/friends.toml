@@ -1,0 +1,21 @@
+# 友链示例数据（方案二进阶·标准化友链页）
+# 由 layouts/friends/single.html 读取
+# 字段：name / url / avatar / desc
+
+[[friends]]
+name = "Lumen 主题仓库"
+url = "https://github.com/gohugoio"
+avatar = ""
+desc = "本主题的开源仓库"
+
+[[friends]]
+name = "Hugo 官方"
+url = "https://gohugo.io"
+avatar = "https://gohugo.io/favicon-32.png"
+desc = "最快的前端建站框架"
+
+[[friends]]
+name = "示例朋友站"
+url = "https://example.com"
+avatar = ""
+desc = "一个使用 Lumen 主题的示例站点"

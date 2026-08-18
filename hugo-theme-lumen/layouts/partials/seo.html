@@ -1,0 +1,99 @@
+{{- /* seo.html —— 全套 SEO 优化（方案二·全套 SEO 优化）自动生成 OG 标签、社交卡片、结构化数据 */ -}}
+{{- $title := "" -}}
+{{- $description := "" -}}
+{{- $image := "" -}}
+{{- $url := .Permalink -}}
+{{- $siteTitle := .Site.Title -}}
+
+{{- if .IsHome -}}
+  {{- $title = $siteTitle -}}
+  {{- $description = .Site.Params.description | default .Site.Params.subtitle -}}
+{{- else -}}
+  {{- $title = printf "%s · %s" .Title $siteTitle -}}
+  {{- $description = .Description | default (.Summary | plainify | truncate 160) | default .Site.Params.description -}}
+{{- end -}}
+
+{{- /* OG 图片：文章封面 > 默认图 */ -}}
+{{- with .Params.cover -}}{{- $image = . -}}{{- end -}}
+{{- with .Site.Params.defaultImage -}}{{- if not $image }}{{- $image = . -}}{{- end -}}{{- end -}}
+
+{{- /* 标准标签 */ -}}
+<title>{{ $title }}</title>
+<meta name="description" content="{{ $description }}">
+<link rel="canonical" href="{{ $url }}">
+{{- with .Params.keywords -}}
+<meta name="keywords" content="{{ delimit . ", " }}">
+{{- else -}}
+{{- with .Site.Params.keywords -}}
+<meta name="keywords" content="{{ delimit . ", " }}">
+{{- end -}}
+{{- end -}}
+
+{{- /* Open Graph（方案二·自动生成 OG 标签 / 社交卡片）*/ -}}
+<meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}">
+<meta property="og:title" content="{{ if .IsHome }}{{ $siteTitle }}{{ else }}{{ .Title }}{{ end }}">
+<meta property="og:description" content="{{ $description }}">
+<meta property="og:url" content="{{ $url }}">
+<meta property="og:site_name" content="{{ $siteTitle }}">
+{{- with .Site.Language.Lang }}
+<meta property="og:locale" content="{{ replace . "-" "_" }}">
+{{- end -}}
+{{- with $image }}
+<meta property="og:image" content="{{ . | absURL }}">
+<meta property="og:image:alt" content="{{ $.Title }}">
+{{- end -}}
+
+{{- /* Twitter Card */ -}}
+<meta name="twitter:card" content="{{ if $image }}summary_large_image{{ else }}summary{{ end }}">
+<meta name="twitter:title" content="{{ if .IsHome }}{{ $siteTitle }}{{ else }}{{ .Title }}{{ end }}">
+<meta name="twitter:description" content="{{ $description }}">
+{{- with $image }}
+<meta name="twitter:image" content="{{ . | absURL }}">
+{{- end -}}
+{{- with .Site.Params.twitter }}
+<meta name="twitter:site" content="@{{ . }}">
+{{- end -}}
+
+{{- /* 结构化数据 JSON-LD（方案二·结构化数据）*/ -}}
+{{- if .IsPage -}}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": {{ .Title | plainify | jsonify }},
+  "description": {{ $description | jsonify }},
+  "datePublished": {{ .Date.Format "2006-01-02T15:04:05Z07:00" | jsonify }},
+  "dateModified": {{ .Lastmod.Format "2006-01-02T15:04:05Z07:00" | jsonify }},
+  "author": {
+    "@type": "Person",
+    "name": {{ .Site.Author.name | default .Site.Params.author | default $siteTitle | jsonify }}
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": {{ $siteTitle | jsonify }}
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": {{ $url | jsonify }}
+  }{{- with $image }},
+  "image": {{ . | absURL | jsonify }}
+  {{- end }}
+}
+</script>
+{{- else if .IsHome -}}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": {{ $siteTitle | jsonify }},
+  "url": {{ .Site.BaseURL | jsonify }},
+  "description": {{ $description | jsonify }}
+}
+</script>
+{{- end -}}
+
+{{- /* RSS / Sitemap 自动发现（方案二·Sitemap / RSS 订阅）*/ -}}
+{{ with .OutputFormats.Get "rss" -}}
+<link rel="alternate" type="application/rss+xml" title="{{ $siteTitle }} RSS" href="{{ .Permalink }}">
+{{- end -}}
+<link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
